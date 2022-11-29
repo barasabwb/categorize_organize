@@ -2,7 +2,7 @@
 define('ROOT',  'http://localhost/mod_organizer/');
 define('BASE',  __DIR__);
 
-
+require_once __DIR__.'/base/configurations.php';
 require_once __DIR__.'/base/BaseModel.php';
 require_once __DIR__.'/base/BaseController.php';
 
@@ -47,15 +47,15 @@ if ($url == '/')
     if (file_exists($ctrlPath))
     {
 
-        require_once __DIR__.'/Models/'.$requestedController.'_model.php';
+        // require_once __DIR__.'/Models/'.$requestedController.'_model.php';
         require_once __DIR__.'/Controllers/'.$requestedController.'_controller.php';
         // require_once __DIR__.'/Views/'.$requestedController.'_view.php';
 
-        $modelName      = ucfirst($requestedController).'Model';
+        // $modelName      = ucfirst($requestedController).'Model';
         $controllerName = ucfirst($requestedController).'Controller';
         // $viewName       = ucfirst($requestedController).'View';
 
-        $controllerObj  = new $controllerName( new $modelName );
+        $controllerObj  = new $controllerName();
         // $viewObj        = new $viewName( $controllerObj, new $modelName );
 
         // If there is a method - Second parameter
