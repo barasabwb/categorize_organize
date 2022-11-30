@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.4/dist/flowbite.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="<?= BASE?>/resources/styles/local/main.css" />
+        <link rel="stylesheet" href="<?= ROOT?>resources/styles/css/main.css" />
     </head>
     <style>
         body {
