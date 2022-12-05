@@ -1,54 +1,18 @@
-<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-    <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"
-            />
-        </svg>
-        <span class="font-semibold text-xl tracking-tight">Organizer</span>
+<style>
+    html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+</style>
+<nav class="relative w-full flex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg">
+  <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+    <div class="container-fluid">
+      <a class="flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1" href="#">
+        <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" style="height: 20px" alt="" loading="lazy" />
+      </a>
     </div>
-    <div class="block lg:hidden">
-        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <title>Menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-            </svg>
-        </button>
-    </div>
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden md:block">
-        <div class="text-sm ">
-            <ul class="flex border-b">
-                <li class="-mb-px mr-1">
-                    <a class="bg-white text-teal-500 inline-block border-l border-t border-r rounded-t py-2 px-4 font-semibold" href="#">Active</a>
-                </li>
-                <li class="mr-1">
-                    <a class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:text-white duration-300 bg-teal text-teal-200 inline-block py-2 px-4 font-semibold" href="#">Tab</a>
-                </li>
-                <li class="mr-1">
-                    <a class="bg-teal text-teal-200 inline-block py-2 px-4 font-semibold" href="#">Tab</a>
-                </li>
-                <li class="mr-1">
-                    <a class="bg-teal text-teal-200 inline-block py-2 px-4 font-semibold" href="#">Tab</a>
-                </li>
-            </ul>
-        </div>
-     
-    </div>
-    <div class="text-sm sm:hidden ml-auto">
-        <div class="float-right">
-        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                Docs
-            </a>
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                Examples
-            </a>
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-                Blog
-            </a>
-        </div>
-    
-        </div>
+  </div>
 </nav>
-<script>
-     
-</script>
+<br>

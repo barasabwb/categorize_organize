@@ -1,93 +1,113 @@
-<div class="card px-10 py-2 ">
-<div class=" grid grid-cols-3 gap-4">
-    <div>
-    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">   
-    </div>
-    <div>
-    <input  id="grid-first-name" type="file">   
-    </div>
-    <div>
-    <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-        Add Category
-    </button>
-    </div>
+<style></style>
+<div class="h-full">
+    <div class="w-60 custom_scroll h-full shadow-md bg-white px-1 absolute font-sans overflow-y-auto">
+        <div class="float-right text-sm mr-4">
+            <button
+                data-bs-toggle="modal"
+                data-bs-target="#add_category_modal"
+                class="add_category_btn bg-blue-200 hover:bg-blue-500 hover:ring-1 hover:ring-blue-400 focus:bg-green-500 focus:ring-2 focus:ring-green-400 text-white py-1 px-2 transition duration-150 ease-in-out rounded-sm"
+            >
+                Add
+            </button>
+        </div>
 
-</div>
-<div class="card px-10 py-10">
-    <div class="max-w rounded shadow-lg px-5 py-5">
-        <ul id="categories_sortable">
-            <li>
-                <div class="flex md:justify-center mb-2">
-                    <div class="block md:inline-block category">
-                        <a href="#" class="w-40 md:w-80 flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-teal-100">
-                            <div class="pr-2 md:border-r-2">
-                                <img class="text-center ml-2 object-cover w-full rounded-t-lg h-auto w-10 md:h-auto md:w-10 md:rounded-none md:rounded-l-lg" src="<?= ROOT ?>resources/imageS/categories.png" alt="" />
-                            </div>
-                            <div class="flex flex-col justify-between p-4 leading-normal">
-                                <p class="mb-2 text-normal font-sans tracking-tight text-gray-500">
-                                    Category
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="block md:inline-block space-y-1 ml-2">
-                        <button
-                            type="button"
-                            class="block edit_category_btn text-white h-7 w-7 text-center bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                        >
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                        </button>
-                        <button
-                            type="button"
-                            class="block text-white h-8 w-8 text-center bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
-                        >
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
+        <div class="pt-1 px-1">
+            <span class="ml-5 text-sm tracking-wide font-sans align-bottom">
+                <span>Categories</span>
+            </span>
+        </div>
+        <ul class="relative mt-4" id="categories_sortable">
+        <?php foreach(json_decode($data->categories->category_name) as $category): ?>
+ 
+            <li class="relative">
+                <a
+                    class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-100 ease-in-out"
+                    href="#!"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="dark"
+                >
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" class="w-3 h-3 mr-3" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path
+                            fill="currentColor"
+                            d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                        ></path>
+                    </svg>
+                    <span><?=$category->name ?></span>
+                </a>
             </li>
-            <li>
-                <div class="flex md:justify-center mb-2">
-                    <div class="block md:inline-block category">
-                        <a href="#" class="w-40 md:w-80 flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-teal-100">
-                            <div class="pr-2 md:border-r-2">
-                                <img class="text-center ml-2 object-cover w-full rounded-t-lg h-auto w-10 md:h-auto md:w-10 md:rounded-none md:rounded-l-lg" src="<?= ROOT ?>resources/imageS/categories.png" alt="" />
-                            </div>
-                            <div class="flex flex-col justify-between p-4 leading-normal">
-                                <p class="mb-2 text-normal font-sans tracking-tight text-gray-500">
-                                    Category
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="block md:inline-block space-y-1 ml-2">
-                        <button
-                            type="button"
-                            class="block edit_category_btn text-white h-7 w-7 text-center bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                        >
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                        </button>
-                        <button
-                            type="button"
-                            class="block text-white h-8 w-8 text-center bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
-                        >
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </li>
+            <?php endforeach; ?>
+
         </ul>
     </div>
+    <div class="block p-6 ml-64 h-full rounded-lg shadow-lg bg-white">
+        <div class="flex flex-col">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="overflow-hidden">
+                        <table class="min-w-full" id="mods_table">
+                            <thead class="border-b">
+                                <tr>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                                        Mods
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="mods">
+                                <tr class="border-b bg-gray-50 border-gray-200 mod_section">
+                                    <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                        <input type="text" value="Yes" readonly />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-2">
+            <button
+                type="button"
+                id="add_mod_btn"
+                class="px-3 py-1.5 bg-blue-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            >
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
 </div>
-<script>
-    $(function () {
-        $("#categories_sortable").sortable({});
-    });
-    $(document).on("click", ".category", function () {
-        alert($(this).html());
-    });
-    $(document).on("click", ".edit_category_btn", function (e) {
-        e.preventDefault();
-        alert($(this).html());
-    });
-</script>
+
+
+<div class="hidden_elements hidden">
+  <div class="add_mod">
+    <tr class="border-b bg-gray-50 border-gray-200 mod_section">
+        <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+            <input class="mod_input" type="text" value="Yes" />
+        </td>
+    </tr>
+  </div>
+  <div class="add_category">
+    <div class="category grid grid-cols-2 gap-4">
+        <div class="form-group mb-6">
+            <input
+                type="text"
+                class="category_input form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                id="category_name"
+                name="category_name[]"
+                aria-describedby="category_name"
+                placeholder="Category Name:"
+            />
+        </div>
+        <div class="form-group mb-6">
+            <input
+                type="file"
+                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                id="file_input"
+                name="category_image[]"
+                aria-describedby="categoryImage"
+                placeholder="Category Image"
+            />
+        </div>
+    </div>
+  </div>
+
+</div>
