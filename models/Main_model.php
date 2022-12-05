@@ -36,6 +36,17 @@ class MainModel extends BaseModel
             return (object)$rows;
         }
 
+        public function retrieve_row($table, $columns, $where=null){
+            $sql = "SELECT $columns FROM $table";
+            if($where!=null){
+                $sql = $this->parse_where($sql, $where);
+            }
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $rows = $stmt->fetch();
+            return (object)$rows;
+        }
+
         public function insert_data($table, $data){
             $keys = [];
             $table_data=[];

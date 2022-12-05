@@ -2,8 +2,11 @@
   class BaseController
   {
         
-      public function load_view($view)
+      public function load_view($view, $data=null)
       {
+        if($data!==null){
+          $data= (object)$data;
+        }
         require_once BASE.'../views/inc/header.php';
         require_once BASE.'../views/inc/navigation_bar.php';
         require_once BASE.'../views/'.$view.'.php';

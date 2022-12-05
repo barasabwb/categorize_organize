@@ -40,5 +40,8 @@
         }
   
     </style>
+    <script>
+        let url_root = <?= ROOT ?>;
+    </script>
     <body>
 
