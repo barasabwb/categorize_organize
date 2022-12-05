@@ -41,7 +41,7 @@
   
     </style>
     <script>
-        let url_root = <?= ROOT ?>;
+        let url_root = '<?= ROOT ?>';
     </script>
     <body>
 
