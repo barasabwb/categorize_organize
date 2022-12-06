@@ -86,4 +86,17 @@ class MainModel extends BaseModel
 
         }
 
+        public function check_if_exists($table, $columns,  $where){
+            $sql = "SELECT $columns FROM $table";
+            $sql = $this->parse_where($sql, $where);
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $rows = $stmt->fetch();
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }

@@ -21,10 +21,10 @@
                 ></button>
             </div>
             <div class="modal-body relative p-4">
-                <form method="POST" id="categories_form" enctype="multipart/form-data">
+                <form method="POST" id="categories_form" enctype="multipart/form-data" autocomplete="off">
                     <div class="add_categories_section">
-                        <div class="category grid grid-cols-2 gap-4">
-                            <div class="form-group mb-6">
+                        <div class="category grid grid-cols-7 gap-4">
+                            <div class="form-group mb-6 col-span-6">
                                 <input
                                     type="text"
                                     class="category_input form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -34,15 +34,10 @@
                                     placeholder="Category Name:"
                                 />
                             </div>
-                            <div class="form-group mb-6">
-                                <input
-                                    type="file"
-                                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    id="file_input"
-                                    name="category_image[]"
-                                    aria-describedby="categoryImage"
-                                    placeholder="Category Image"
-                                />
+                            <div>
+                                <button type="button" class="float-right delete_item_btn delete_category_btn px-3 py-1.5 bg-red-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

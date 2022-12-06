@@ -1,6 +1,6 @@
 <style></style>
-<div class="h-full">
-    <div class="w-60 custom_scroll h-full shadow-md bg-white px-1 absolute font-sans overflow-y-auto">
+<div class="h-full md:block hidden">
+    <div style="min-width: 15rem" class="w-auto custom_scroll h-auto shadow-md bg-white px-1 absolute font-sans overflow-y-auto">
         <div class="float-right text-sm mr-4">
             <button
                 data-bs-toggle="modal"
@@ -16,13 +16,16 @@
                 <span>Categories</span>
             </span>
         </div>
-        <ul class="relative mt-4" id="categories_sortable">
+        <ul class="relative mt-4 mb-2" id="categories_sortable">
             <?php foreach(json_decode($data->categories->category_name) as $key=>$category): ?>
 
-            <li class="relative category_item">
+            <li class="relative ">
+                <button type="button" class="w-5 h-5 ml-2 float-right delete_item_btn delete_category_db_btn bg-transparent text-red-500 font-medium text-sm leading-tight uppercase rounded hover:bg-grey-700 focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-white-800 active:shadow-lg transition duration-150 ease-in-out">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
                 <a
-                    class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-100 ease-in-out"
-                    href="#!"
+                    class="flex category_item items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-100 ease-in-out"
+                    href=""
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="dark"
                 >
@@ -34,8 +37,11 @@
                     </svg> -->
                     <img class="w-4 h-1 mr-3" src="<?= ROOT?>/resources/images/c1.png" style="height: 20px;" alt="" loading="lazy" />
 
-                    <span class="category_key"><?=$key ?></span>
+                        <span class="category_key"><?=$key ?></span>
+
+
                 </a>
+
             </li>
             <?php endforeach; ?>
         </ul>
@@ -55,8 +61,8 @@
                             </thead>
                             <tbody class="mods">
                                 <tr class="border-b bg-gray-50 border-gray-200 mod_section">
-                                    <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        <input type="text" value="Yes" readonly />
+                                    <td class="text-md text-center text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                        Choose a category
                                     </td>
                                 </tr>
                             </tbody>
@@ -81,31 +87,26 @@
     <div class="add_mod">
         <tr class="border-b bg-gray-50 border-gray-200 mod_section">
             <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                <input class="mod_input" type="text" value="Yes" />
+                <input class="mod_input w-full" type="text" value="" />
             </td>
         </tr>
     </div>
     <div class="add_category">
-        <div class="category grid grid-cols-2 gap-4">
-            <div class="form-group mb-6">
+        <div class="category grid grid-cols-7 gap-4">
+            <div class="form-group mb-6 col-span-6">
                 <input
-                    type="text"
-                    class="category_input form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="category_name"
-                    name="category_name[]"
-                    aria-describedby="category_name"
-                    placeholder="Category Name:"
+                        type="text"
+                        class="category_input form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        id="category_name"
+                        name="category_name[]"
+                        aria-describedby="category_name"
+                        placeholder="Category Name:"
                 />
             </div>
-            <div class="form-group mb-6">
-                <input
-                    type="file"
-                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="file_input"
-                    name="category_image[]"
-                    aria-describedby="categoryImage"
-                    placeholder="Category Image"
-                />
+            <div >
+                <button type="button" class="float-right delete_item_btn delete_category_btn px-3 py-1.5 bg-red-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>
