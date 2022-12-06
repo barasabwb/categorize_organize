@@ -2,6 +2,10 @@ $(function () {
     $("#categories_sortable").sortable({});
 });
 
+$(function () {
+    $('#mods_table tbody').sortable({});
+});
+
 // const url_root= 'http://localhost/mod_organizer/';
 
 $(document).on('click', '#add_category_input_btn', function(){
@@ -36,7 +40,6 @@ $(document).on('submit','#categories_form',function(e){
         success: function (data, status)
         {
             
-
         },
         error: function (xhr, desc, err)
         {
