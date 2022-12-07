@@ -23,7 +23,7 @@ $(document).on("click", "#add_mod_btn", function () {
     var mod = $(".hidden_elements .add_mod").html();
     mod = '<tr class="border-b bg-gray-50 border-gray-200 mod_section"><td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">' + mod + "</td>";
     mod +=
-        '<td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap"><button type="button" class="delete_mod_btn px-3 py-1.5 bg-red-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
+        '<td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap"><button type="button" class="delete_item_btn delete_mod_btn px-3 py-1.5 bg-red-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
     $("#mods_table .mods").append(mod);
     $("#" + id).focus();
 });
@@ -38,7 +38,11 @@ $(document).on("submit", "#categories_form", function (e) {
         data: form_data,
         processData: false,
         contentType: false,
-        success: function (data, status) {},
+        success: function (data, status) {
+            window.setTimeout(function () {
+                window.location.href = window.location.href;
+            }, 1500);
+        },
         error: function (xhr, desc, err) {},
     });
 });
@@ -72,6 +76,8 @@ $(document).on("keyup", ".mod_input", function (e) {
             dataType: "JSON",
             data: {
                 mod: $(this).val(),
+                category_name:$('.category_item.active .category_key').text()
+
             },
             success: function (data) {},
             error: function (xhr, desc, err) {},
@@ -81,6 +87,7 @@ $(document).on("keyup", ".mod_input", function (e) {
 
 $(document).on("click", ".delete_item_btn", function (e) {
     e.preventDefault();
+    
     if($(this).hasClass('delete_mod_btn')){
         var parent = $(this).parent().parent();
         $.ajax({
@@ -92,11 +99,8 @@ $(document).on("click", ".delete_item_btn", function (e) {
                 category_name:$('.category_item.active .category_key').text()
             },
             success: function (response) {
-                if(response=="deleted"){
-                    parent.remove();
-                }else{
-                    alert('not deleted');
-                }
+                parent.remove();
+
             },
             error: function (xhr, desc, err) {},
         });

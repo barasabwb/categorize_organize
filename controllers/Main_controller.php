@@ -57,6 +57,7 @@ class MainController extends BaseController
                 ];
                 $this->model->insert_data('tbl_categories', $data);
             }
+            echo json_encode('added');
         }
     }
 
@@ -101,14 +102,17 @@ class MainController extends BaseController
             $category = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id' => 0]);
             $category = json_decode($category->category_name, true);
             $mod_name = $_POST['mod'];
-            $name = 'Category 1';
-            $size= sizeof( $category[$name]['mods']);
+            $category_name = $_POST['category_name'];
+            $size=0;
+            if(isset($category[$category_name]['mods'])){
+                $size= sizeof( $category[$category_name]['mods']);
+            }
 
             $mod = [
                 "name" => $mod_name,
                 'position' => $size+1,
             ];
-            $category[$name]['mods'][$mod_name] = $mod;
+            $category[$category_name]['mods'][$mod_name] = $mod;
             $where = [
                 'user_id' => 0,
             ];
@@ -116,6 +120,7 @@ class MainController extends BaseController
                 'category_name' => json_encode($category),
             ];
             $this->model->update_row('tbl_categories', $data, $where);
+            echo json_encode('added');
         }
     }
 
@@ -137,12 +142,18 @@ class MainController extends BaseController
                 }
             }else if($args[0]=="mod"){
                 $mod_name = $_POST['mod_name'];
-                if(property_exists($category->$category_name->mods, $mod_name)){
-                    unset($category->$category_name->mods->$mod_name);
+                if(!empty($category->$category_name->mods)){
+                    if(property_exists($category->$category_name->mods, $mod_name)){
+                        unset($category->$category_name->mods->$mod_name);
+                    }else{
+                        echo json_encode('not deleted');
+                        return false;
+                    }
                 }else{
-                    echo json_encode('not deleted');
+                    echo json_encode('empty');
                     return false;
                 }
+                
             }
             $data = [
                 'category_name' => json_encode($category),
