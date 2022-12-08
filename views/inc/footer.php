@@ -1,4 +1,4 @@
-<footer class="text-center text-white mt-4" style="background-color: #0a4275;">
+<!-- <footer class="text-center text-white mt-4" style="background-color: #0a4275;">
   <div class="container p-6">
     <div class="">
       <p class="flex justify-center items-center">
@@ -14,7 +14,7 @@
     © 2021 Copyright:
     <a class="text-white" href="https://tailwind-elements.com/">Tailwind Elements</a>
   </div>
-</footer>
+</footer> -->
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
 <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>

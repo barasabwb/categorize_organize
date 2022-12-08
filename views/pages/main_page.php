@@ -1,47 +1,44 @@
 <style></style>
 <div class="h-auto md:block hidden">
-    <div style="min-width: 15rem;height:90vh" class="w-auto  custom_scroll shadow-md bg-white px-1 absolute font-sans overflow-y-auto">
-        <div class="float-right text-sm mr-4">
-            <button
-                data-bs-toggle="modal"
-                data-bs-target="#add_category_modal"
-                class="add_category_btn bg-blue-200 hover:bg-blue-500 hover:ring-1 hover:ring-blue-400 focus:bg-green-500 focus:ring-2 focus:ring-green-400 text-white py-1 px-2 transition duration-150 ease-in-out rounded-sm"
-            >
-                Add
-            </button>
+    <div style="min-width: 15rem;max-width:15rem; height: 100%;" class=" w-auto custom_scroll shadow-md bg-white px-1 fixed z-10 font-sans overflow-y-auto">
+        
+        <div style="max-width:14.5rem" class="flex pb-2 fixed z-50 bg-white w-full border-b">
+            <div class="mr-4">
+                <span class="ml-5 text-sm tracking-wide font-sans align-bottom">
+                    <span>Categories</span>
+                </span>
+            </div>
+            <div class="text-sm">
+                <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#add_category_modal"
+                    class="add_category_btn bg-blue-200 hover:bg-blue-500 hover:ring-1 hover:ring-blue-400 focus:bg-green-500 focus:ring-2 focus:ring-green-400 text-white py-1 px-2 transition duration-150 ease-in-out rounded-sm"
+                >
+                    Add
+                </button>
+            </div>
         </div>
 
-        <div class="pt-1 px-1">
-            <span class="ml-5 text-sm tracking-wide font-sans align-bottom">
-                <span>Categories</span>
-            </span>
-        </div>
-        <ul class="relative mt-4 mb-2" id="categories_sortable">
+        <ul class="relative mt-9 mb-10" id="categories_sortable">
             <?php foreach(json_decode($data->categories->category_name) as $key=>$category): ?>
 
             <li class="relative hover:text-gray-900 hover:bg-gray-100 transition duration-100 ease-in-out">
-                <button type="button" class="mt-1 inline-block w-7 h-8 ml-2 float-right delete_item_btn delete_category_db_btn bg-transparent text-red-500 font-medium text-sm leading-tight uppercase rounded hover:bg-grey-700 focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-white-800 active:shadow-lg transition duration-150 ease-in-out">
+                <button
+                    type="button"
+                    class="mt-1 inline-block w-7 h-8 ml-2 float-right delete_item_btn delete_category_db_btn bg-transparent text-red-500 font-medium text-sm leading-tight uppercase rounded hover:bg-grey-700 focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-white-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-                <a
-                    class="ibline-block flex category_item items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded "
-                    href=""
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="dark"
-                >
+                <a class=" break-all inline-block flex category_item items-center text-sm py-4 px-1 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded" href="" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                    <!-- <img class="w-4 h-1 mr-3" src="<?= ROOT?>/resources/images/c1.png" style="height: 20px;" alt="" loading="lazy" /> -->
 
-                    <img class="w-4 h-1 mr-3" src="<?= ROOT?>/resources/images/c1.png" style="height: 20px;" alt="" loading="lazy" />
-
-                        <span class="category_key"><?=$key ?></span>
-
-
+                    <span class="category_key text-xs"><?=$key ?></span>
                 </a>
-
             </li>
             <?php endforeach; ?>
         </ul>
     </div>
-    <div class="block p-6 ml-64 h-full rounded-lg shadow-lg bg-white">
+    <div class="block p-6 ml-64 mr-5 h-full rounded-lg shadow-lg bg-white">
         <div class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -90,16 +87,19 @@
         <div class="category grid grid-cols-7 gap-4">
             <div class="form-group mb-6 col-span-6">
                 <input
-                        type="text"
-                        class="category_input form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="category_name"
-                        name="category_name[]"
-                        aria-describedby="category_name"
-                        placeholder="Category Name:"
+                    type="text"
+                    class="category_input form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    id="category_name"
+                    name="category_name[]"
+                    aria-describedby="category_name"
+                    placeholder="Category Name:"
                 />
             </div>
-            <div >
-                <button type="button" class="float-right delete_item_btn delete_category_btn px-3 py-1.5 bg-red-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
+            <div>
+                <button
+                    type="button"
+                    class="float-right delete_item_btn delete_category_btn px-3 py-1.5 bg-red-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
             </div>
