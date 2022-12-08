@@ -29,7 +29,7 @@
                 >
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-                <a class=" break-all inline-block flex category_item items-center text-sm py-4 px-1 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded" href="" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                <a class=" break-all inline-block flex category_item items-center text-sm py-4 pl-2 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded" href="" data-mdb-ripple="true" data-mdb-ripple-color="dark">
                     <!-- <img class="w-4 h-1 mr-3" src="<?= ROOT?>/resources/images/c1.png" style="height: 20px;" alt="" loading="lazy" /> -->
 
                     <span class="category_key text-xs"><?=$key ?></span>
