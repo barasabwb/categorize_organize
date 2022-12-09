@@ -32,11 +32,15 @@ class MainController extends BaseController
                 $categories = json_decode($category->category_name, true);
                 $size = sizeof($categories)+1;
                 foreach ($_POST['category_name'] as $add_cat) {
-                    $categories[$add_cat] = [
-                        'name' => $add_cat,
-                        'position' => $size,
-                    ];
-                    $size++;
+                    if(!array_key_exists($add_cat, $categories)){
+                    
+                        $categories[$add_cat] = [
+                            'name' => $add_cat,
+                            'position' => $size,
+                        ];
+                        $size++;
+                        
+                    }
                 }
                 $data = [
                     'category_name' => json_encode($categories),
@@ -79,7 +83,7 @@ class MainController extends BaseController
                 foreach ($category->$name->mods as $mod) {
                     $html .= '  <tr class="border-b bg-gray-50 border-gray-200 mod_section">
                                     <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        <input class="w-full mod_input" type="text" value="'.$mod->name.'" readonly />
+                                        <input class="w-full mod_input retrieved_input border-none focus:ring-0 bg-transparent" id="'.$mod->name.'" type="text" value="'.$mod->name.'" readonly />
                                     </td>
                                       <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                         <button type="button" id="'.$mod->name.'" class="delete_item_btn delete_mod_btn px-3 py-1.5 bg-red-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
@@ -112,7 +116,16 @@ class MainController extends BaseController
                 "name" => $mod_name,
                 'position' => $size+1,
             ];
-            $category[$category_name]['mods'][$mod_name] = $mod;
+            if(!array_key_exists('mods', $category[$category_name])){ 
+                $category[$category_name]['mods'][$mod_name] = $mod;
+    
+            }else{
+                
+                if(!array_key_exists($mod_name, $category[$category_name]['mods'])){     
+                    $category[$category_name]['mods'][$mod_name] = $mod;
+                }
+            }
+            
             $where = [
                 'user_id' => 0,
             ];

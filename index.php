@@ -15,12 +15,12 @@ if ($url == '/')
     // Initiate the home controller
     // and render the home view
 
-    require_once __DIR__.'/Models/Main_model.php';
+    // require_once __DIR__.'/Models/Main_model.php';
     require_once __DIR__.'/Controllers/Main_controller.php';
     // require_once __DIR__.'/Views/index_view.php';
 
-    $mainModel = New MainModel();
-    $mainController = New MainController($mainModel);
+    // $mainModel = New MainModel();
+    $mainController = New MainController();$mainController->home();
 
 
 }else{

@@ -38,7 +38,7 @@
             <?php endforeach; ?>
         </ul>
     </div>
-    <div class="block p-6 ml-64 mr-5 h-full rounded-lg shadow-lg bg-white">
+    <div class="block p-6 ml-64 mr-5 min-h-full rounded-lg shadow-lg bg-white">
         <div class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="text-center mt-2">
+        <div class="text-center mt-2 add_mod_btn hidden">
             <button
                 type="button"
                 id="add_mod_btn"

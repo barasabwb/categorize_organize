@@ -61,6 +61,7 @@ $(document).on("click", ".category_item", function (e) {
             category: $(this).find(".category_key").text(),
         },
         success: function (data) {
+            $('.add_mod_btn').removeClass('hidden');
             $("#mods_table .mods").html(data);
         },
         error: function (xhr, desc, err) {},
@@ -127,4 +128,26 @@ $(document).on("click", ".delete_item_btn", function (e) {
         });
     }
 
+});
+
+// prime with empty jQuery object
+window.prevFocus = $();
+
+// Catch any bubbling focusin events (focus does not bubble)
+$(document).on('focusin', '.mod_input', function () {
+    window.prevFocus = $(this);
+});
+
+$(document).on("click.lose_focus", function (e) {
+    if ($(e.target) == prevFocus) {
+
+    } else if ($(e.target).hasClass("mod_input")) {
+
+    }
+});
+
+$(document).on("dblclick", ".retrieved_input", function (e) {
+    e.preventDefault();
+    var classes= 'border-none focus:ring-0 bg-transparent';
+    $(this).removeClass(classes);
 });
