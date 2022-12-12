@@ -22,7 +22,7 @@
         <ul class="relative mt-9 mb-10" id="categories_sortable">
             <?php foreach(json_decode($data->categories->category_name) as $key=>$category): ?>
 
-            <li class="relative hover:text-gray-900 hover:bg-gray-100 transition duration-100 ease-in-out">
+            <li id="category-<?=$category->position ?>" class="category relative hover:text-gray-900 hover:bg-gray-100 transition duration-100 ease-in-out">
                 <button
                     type="button"
                     class="mt-1 inline-block w-7 h-8 ml-2 float-right delete_item_btn delete_category_db_btn bg-transparent text-red-500 font-medium text-sm leading-tight uppercase rounded hover:bg-grey-700 focus:bg-white-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-white-800 active:shadow-lg transition duration-150 ease-in-out"

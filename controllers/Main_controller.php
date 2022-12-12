@@ -178,5 +178,53 @@ class MainController extends BaseController
         }
     }
 
+    public function update_categories_position(){
+        $categories = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id' => 0]);
+        $categories = json_decode($categories->category_name, true);
+        $i=1;
+        foreach ($_POST['category_keys'] as $category){
+            $categories[$category]['position'] = $i;
+            $i++;
+        }
+        $position = array_column($categories, 'position');
+
+        array_multisort($position, SORT_ASC, $categories);
+//        foreach ( $categories as $category){
+//            echo $category['name'].' '.$category['position'].'<br>';
+//            $i++;
+//        }
+
+        $data = [
+            'category_name' => json_encode($categories),
+        ];
+        $this->model->update_row('tbl_categories', $data, ['user_id'=>0]);
+        echo json_encode('updated');
+    }
+
+    public function update_mods_position(){
+        $categories = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id' => 0]);
+        $categories = json_decode($categories->category_name, true);
+        $i=1;
+        $category_name=$_POST['category_name'];
+        foreach ($_POST['mod_keys'] as $mod){
+            $categories[$category_name]['mods'][$mod]['position'] = $i;
+            $i++;
+        }
+        $position = array_column($categories[$category_name]['mods'], 'position');
+        array_multisort($position, SORT_ASC, $categories[$category_name]['mods']);
+//        foreach ( $categories[$category_name]['mods'] as $mod){
+//            echo $mod['name'].' '.$mod['position'].'<br>';
+//            $i++;
+//        }
+
+        $data = [
+            'category_name' => json_encode($categories),
+        ];
+        $this->model->update_row('tbl_categories', $data, ['user_id'=>0]);
+        echo json_encode('updated');
+
+    }
+
+
 
 }

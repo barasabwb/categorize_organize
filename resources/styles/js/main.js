@@ -1,9 +1,55 @@
 $(function () {
-    $("#categories_sortable").sortable({});
+    $("#categories_sortable").sortable({
+        axis: 'y',
+        update: function (event, ui) {
+            var keys = [];
+            $('#categories_sortable .category').each(function() {
+                    keys.push($(this).find('.category_key').text());
+            });
+
+            // POST to server using $.post or $.ajax
+            $.ajax({
+                data: {
+                    category_keys:keys
+                },
+                type: 'POST',
+                url: url_root+'main/update_categories_position',
+                dataType: "JSON",
+                success: function (data, status) {
+                    // alert('yes');
+                },
+                error: function (xhr, desc, err) {},
+            });
+        }
+    });
 });
 
 $(function () {
-    $("#mods_table tbody").sortable({});
+    $("#mods_table tbody").sortable({
+        axis: 'y',
+        update: function (event, ui) {
+            var keys = [];
+            $('#mods_table .retrieved_input ').each(function() {
+                keys.push($(this).val());
+            });
+
+            // POST to server using $.post or $.ajax
+            $.ajax({
+                data: {
+                    mod_keys:keys,
+                    category_name:$('.category_item.active .category_key').text()
+
+                },
+                type: 'POST',
+                url: url_root+'main/update_mods_position',
+                dataType: "JSON",
+                success: function (data, status) {
+                    // alert('yes');
+                },
+                error: function (xhr, desc, err) {},
+            });
+        }
+    });
 });
 
 // const url_root= 'http://localhost/mod_organizer/';
@@ -70,6 +116,7 @@ $(document).on("click", ".category_item", function (e) {
 
 $(document).on("keyup", ".mod_input", function (e) {
     e.preventDefault();
+    var input = $(this);
     if (e.which == 13) {
         $.ajax({
             url: url_root + "main/add_mod_to_Category",
@@ -80,7 +127,11 @@ $(document).on("keyup", ".mod_input", function (e) {
                 category_name:$('.category_item.active .category_key').text()
 
             },
-            success: function (data) {},
+            success: function (data) {
+                var classes= 'border-none focus:ring-0 bg-transparent';
+                input.attr('readonly', true);
+                $(input).addClass(classes);
+            },
             error: function (xhr, desc, err) {},
         });
     }
@@ -150,4 +201,6 @@ $(document).on("dblclick", ".retrieved_input", function (e) {
     e.preventDefault();
     var classes= 'border-none focus:ring-0 bg-transparent';
     $(this).removeClass(classes);
+    input.attr('readonly', false);
+
 });

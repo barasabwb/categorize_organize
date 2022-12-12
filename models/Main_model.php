@@ -63,6 +63,7 @@ class MainModel extends BaseModel
         public function update_row($table, $data, $where=null){
             $set= [];
             foreach($data as $key => $value){
+                $value= str_replace("'","''", $value);
                 $set[]=$key.'='."'$value'";
             }
             $sql = "UPDATE $table set ".implode(', ',$set);
@@ -98,5 +99,7 @@ class MainModel extends BaseModel
                 return false;
             }
         }
+
+
 
     }
