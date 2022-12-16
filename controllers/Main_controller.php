@@ -30,8 +30,14 @@ class MainController extends BaseController
             if($this->model->check_if_exists('tbl_categories', '*', ['user_id'=>0])){
                 $category = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id' => 0]);
                 $categories = json_decode($category->category_name, true);
-                $size = sizeof($categories)+1;
+                if(!empty($categories)){
+                    $size = sizeof($categories)+1;
+                }else{
+                    $size=0;
+                }
                 foreach ($_POST['category_name'] as $add_cat) {
+                    if(!empty($categories)){
+
                     if(!array_key_exists($add_cat, $categories)){
                     
                         $categories[$add_cat] = [
@@ -41,6 +47,13 @@ class MainController extends BaseController
                         $size++;
                         
                     }
+                }else{
+                    $categories[$add_cat] = [
+                        'name' => $add_cat,
+                        'position' => $size,
+                    ];
+                    $size++;
+                }
                 }
                 $data = [
                     'category_name' => json_encode($categories),
@@ -83,6 +96,7 @@ class MainController extends BaseController
                 foreach ($category->$name->mods as $mod) {
                     $html .= '  <tr class="border-b bg-gray-50 border-gray-200 mod_section">
                                     <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                        <span class="original_value hidden">'.$mod->name.'</span>
                                         <input class="w-full mod_input retrieved_input border-none focus:ring-0 bg-transparent" id="'.$mod->name.'" type="text" value="'.$mod->name.'" readonly />
                                     </td>
                                       <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
@@ -181,19 +195,23 @@ class MainController extends BaseController
     public function update_categories_position(){
         $categories = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id' => 0]);
         $categories = json_decode($categories->category_name, true);
+
         $i=1;
         foreach ($_POST['category_keys'] as $category){
             $categories[$category]['position'] = $i;
             $i++;
         }
+        
         $position = array_column($categories, 'position');
 
         array_multisort($position, SORT_ASC, $categories);
+
+
+        
 //        foreach ( $categories as $category){
 //            echo $category['name'].' '.$category['position'].'<br>';
 //            $i++;
 //        }
-
         $data = [
             'category_name' => json_encode($categories),
         ];
@@ -223,6 +241,42 @@ class MainController extends BaseController
         $this->model->update_row('tbl_categories', $data, ['user_id'=>0]);
         echo json_encode('updated');
 
+    }
+
+    public function update_mod()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $category = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id' => 0]);
+            $category = json_decode($category->category_name,true);
+            $new_mod_name = $_POST['mod'];
+            $mod_name = (string)$_POST['original_mod'];
+            $category_name = $_POST['category_name'];
+          
+            $position =  $category[$category_name]['mods'][$mod_name]['position'];
+            unset( $category[$category_name]['mods'][$mod_name]);
+
+            $mod = [
+                "name" => $new_mod_name,
+                'position' => $position,
+            ];
+          
+
+            $category[$category_name]['mods'][$new_mod_name]= $mod;
+           
+
+            $position = array_column($category[$category_name]['mods'], 'position');
+            array_multisort($position, SORT_ASC, $category[$category_name]['mods']);
+            
+            $where = [
+                'user_id' => 0,
+            ];
+            $data = [
+                'category_name' => json_encode($category),
+            ];
+            $this->model->update_row('tbl_categories', $data, $where);
+            echo json_encode('updated');
+        }
     }
 
 

@@ -45,11 +45,7 @@
                     <div class="overflow-hidden">
                         <table class="min-w-full" id="mods_table">
                             <thead class="border-b">
-                                <tr>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                                        Mods
-                                    </th>
-                                </tr>
+                               
                             </thead>
                             <tbody class="mods">
                                 <tr class="border-b bg-gray-50 border-gray-200 mod_section">
@@ -79,7 +75,7 @@
     <div class="add_mod">
         <tr class="border-b bg-gray-50 border-gray-200 mod_section">
             <td class="text-md text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                <input class="mod_input w-full" type="text" value="" />
+                <input class="mod_input w-full editing" type="text" value="" />
             </td>
         </tr>
     </div>

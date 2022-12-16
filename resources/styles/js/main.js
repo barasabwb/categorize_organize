@@ -118,22 +118,7 @@ $(document).on("keyup", ".mod_input", function (e) {
     e.preventDefault();
     var input = $(this);
     if (e.which == 13) {
-        $.ajax({
-            url: url_root + "main/add_mod_to_Category",
-            type: "POST",
-            dataType: "JSON",
-            data: {
-                mod: $(this).val(),
-                category_name:$('.category_item.active .category_key').text()
-
-            },
-            success: function (data) {
-                var classes= 'border-none focus:ring-0 bg-transparent';
-                input.attr('readonly', true);
-                $(input).addClass(classes);
-            },
-            error: function (xhr, desc, err) {},
-        });
+        update_mod(input);
     }
 });
 
@@ -200,7 +185,48 @@ $(document).on("click.lose_focus", function (e) {
 $(document).on("dblclick", ".retrieved_input", function (e) {
     e.preventDefault();
     var classes= 'border-none focus:ring-0 bg-transparent';
-    $(this).removeClass(classes);
-    input.attr('readonly', false);
-
+    $(this).removeClass(classes).addClass('editing');
+    $(this).attr('readonly', false);
 });
+
+
+function update_mod(input){
+    input.removeClass('editing');
+    if(input.hasClass('retrieved_input')){
+        $.ajax({
+            url: url_root + "main/update_mod",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                mod: input.val(),
+                original_mod: input.parent().find('.original_value').text(),
+                category_name:$('.category_item.active .category_key').text()
+    
+            },
+            success: function (data) {
+                input.parent().find('.original_value').html(input.val())
+                var classes= 'border-none focus:ring-0 bg-transparent';
+                input.attr('readonly', true);
+                $(input).addClass(classes);
+            },
+            error: function (xhr, desc, err) {},
+        });
+    }else{
+        $.ajax({
+            url: url_root + "main/add_mod_to_Category",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                mod: input.val(),
+                category_name:$('.category_item.active .category_key').text()
+    
+            },
+            success: function (data) {
+                var classes= 'border-none focus:ring-0 bg-transparent';
+                input.attr('readonly', true);
+                $(input).addClass(classes);
+            },
+            error: function (xhr, desc, err) {},
+        });
+    }  
+}
