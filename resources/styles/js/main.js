@@ -222,7 +222,7 @@ function update_mod(input){
     
             },
             success: function (data) {
-                var classes= 'border-none focus:ring-0 bg-transparent';
+                var classes= 'border-none focus:ring-0 bg-transparent retrieved_input';
                 input.attr('readonly', true);
                 $(input).addClass(classes);
             },
@@ -230,3 +230,12 @@ function update_mod(input){
         });
     }  
 }
+
+$(document).on('click', function (e) {
+    var classes= 'border-none focus:ring-0 bg-transparent';
+    if (!$(e.target).hasClass("mod_input")) {
+        if ($('.mods .editing').length>0) {
+            update_mod($('.mods .editing'));
+        }
+    }
+});

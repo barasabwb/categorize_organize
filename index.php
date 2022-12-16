@@ -14,7 +14,7 @@ if ($url == '/')
     // This is the home page
     // Initiate the home controller
     // and render the home view
-    echo __DIR__;
+    // echo __DIR__;
     // require_once __DIR__.'/Models/Main_model.php';
     require_once __DIR__.'/Controllers/Main_controller.php';
     // require_once __DIR__.'/Views/index_view.php';
