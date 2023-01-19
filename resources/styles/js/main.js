@@ -184,6 +184,11 @@ $(document).on("click.lose_focus", function (e) {
 
 $(document).on("dblclick", ".retrieved_input", function (e) {
     e.preventDefault();
+     if ($('.mods .editing').length>0 && $('.mods .editing').val().length>0) {
+            update_mod($('.mods .editing'));
+        }else if ($('.mods .editing').length>0 && $('.mods .editing').val().length==0){
+            $('.mods .editing').parent().parent().remove();
+        }
     var classes= 'border-none focus:ring-0 bg-transparent';
     $(this).removeClass(classes).addClass('editing');
     $(this).attr('readonly', false);
@@ -233,9 +238,23 @@ function update_mod(input){
 
 $(document).on('click', function (e) {
     var classes= 'border-none focus:ring-0 bg-transparent';
-    if (!$(e.target).hasClass("mod_input")) {
-        if ($('.mods .editing').length>0) {
+    if (!$(e.target).hasClass("mod_input") && !$(e.target).hasClass("add_mod_btn")) {
+        if ($('.mods .editing').length>0 && $('.mods .editing').val().length>0) {
             update_mod($('.mods .editing'));
+        }else if ($('.mods .editing').length>0 && $('.mods .editing').val().length==0){
+            $('.mods .editing').parent().parent().remove();
         }
     }
+});
+$("#go_to_get_started").click(function(e) {
+    e.preventDefault();
+    $('html, body').animate({
+        scrollTop: $("#get_started_section").offset().top
+    }, 500);
+});
+$("#go_to_home").click(function(e) {
+    e.preventDefault();
+    $('html, body').animate({
+        scrollTop: $("#home_section").offset().top-50
+    }, 500);
 });

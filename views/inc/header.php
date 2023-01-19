@@ -28,9 +28,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="<?= ROOT?>resources/styles/css/main.css" />
         <style>
-        body {
+        /* body {
             font-family: Copperplate, Papyrus, fantasy;
-        }
+        } */
         .highlight{
             border: 1px solid red;
             font-weight: bold;
@@ -44,5 +44,5 @@
     </script>
     </head>
 
-    <body>
+    <body class="font-sans">
 

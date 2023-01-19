@@ -59,13 +59,13 @@
                 </div>
             </div>
         </div>
-        <div class="text-center mt-2 add_mod_btn hidden">
+        <div class="text-center mt-2 hidden">
             <button
                 type="button"
                 id="add_mod_btn"
-                class="px-3 py-1.5 bg-blue-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                class="add_mod_btn px-3 py-1.5 bg-blue-600 text-white font-medium text-lg leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
             >
-                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                <i class="fa fa-plus-circle add_mod_btn" aria-hidden="true"></i>
             </button>
         </div>
     </div>

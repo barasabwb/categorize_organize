@@ -16,10 +16,16 @@ class MainController extends BaseController
 
     public function home()
     {
-
         $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
         $data['categories'] = $row;
         return $this->load_view('pages/main_page', $data);
+    }
+
+    public function landing_page()
+    {
+        $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
+        $data['categories'] = $row;
+        return $this->load_view('pages/landing_page', $data);
     }
 
     public function add_category()
