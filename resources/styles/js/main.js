@@ -258,3 +258,11 @@ $("#go_to_home").click(function(e) {
         scrollTop: $("#home_section").offset().top-50
     }, 500);
 });
+
+// $(window).scroll(function() {
+//     if ($(this).scrollTop() > 75 ) {
+//       $('#get_started_section').slideDown();
+//     } else {
+//       $('#get_started_section').slideUp();
+//     }
+//   }); 
