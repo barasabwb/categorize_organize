@@ -1,4 +1,4 @@
-<div class="flex flex-col h-screen justify-between w-full bg-gradient-to-tr from-slate-100 via-teal-50 to-cyan-50">
+<div class="flex flex-col h-screen justify-between w-full bg-gradient-to-tr from-slate-100 via-teal-50 to-cyan-50 landing_page">
     <section class="navigation_bar_section sticky top-0 z-50">
         <nav class="bg-gradient-to-br from-slate-100 via-cyan-50 to-teal-50 w-full py-4 px-4 flex items-center">
             <div>
@@ -10,20 +10,27 @@
                 <span class="hover:scale-110 transition duration-100 ease-in-out"><a href="">Contacts</a></span>
             </div>
             <div class="ml-auto float-right space-x-3 text-sm">
-                <span> <button class="text-sm text-black p-1 px-2 hover:scale-110 hover:shadow-lg rounded transition duration-100 ease-in-out login_user_btn">Sign In</button></span>
+                <span> <button class="text-sm text-black p-1 px-2 hover:scale-110 hover:shadow-sm rounded transition duration-100 ease-in-out login_user_btn">Sign In</button></span>
                 <span> <button class="text-sm text-white bg-blue-500 p-1 px-2 hover:scale-110 hover:bg-indigo-400 hover:shadow-lg rounded transition duration-100 ease-in-out register_user_btn">Sign Up</button></span>
             </div>
         </nav>
     </section>
     <!-- <section class="w-full h-full bg-no-repeat bg-cover" style="background-position: center center; background-image: url('<?= ROOT?>resources/images/png_tree_Sort.png'); height: 500px;"> -->
-    <section class="w-full h-full">    
-        <div class="grid grid-cols-2 h-full">
-            <div class="h-auto w-full flex justify-left bg-cover bg-no-repeat" style="background-image: url('<?= ROOT?>resources/images/png_tree_Sort.png');">
-                <!-- <img src="<?= ROOT?>resources/images/png_tree_Sort.png" class="" alt=""> -->
-            </div>
-            <div class="h-full w-full flex justify-left">
-                <p class="font-bold">Greetings</p>
-            </div>
+    <section class="w-full h-full  bg-gradient-to-b from-slate-100 via-teal-50 to-cyan-50">    
+        <div class="hidden md:block h-full w-full bg-cover bg-no-repeat" style="background-image: url('<?= ROOT?>resources/images/png_tree_Sort.png');">
+            <div class="w-full text-center pt-36">
+                <p class=" font-bold text-6xl text-teal-600">Greetings!</p> 
+                <p class="pl-8">Get started with organizing your processes!</p>
+                <button data-bs-toggle="modal" data-bs-target="#register_user_modal" class="px-3 py-1 bg-blue-400 rounded text-white mt-4 mr-36 animate-bounce get_started_btn">Get Started Now</button>
+            </div> 
+        </div>
+
+        <div class="md:hidden h-full w-full">
+            <div class="w-full pt-16 px-8">
+                <p class=" font-bold text-4xl text-teal-600">Greetings!</p> 
+                <p>Get started with organizing your processes!</p>
+                <button class="px-3 py-1 bg-blue-400 rounded text-white mt-8 animate-bounce hover:scale-110 hover:bg-indigo-400 hover:shadow-lg rounded transition duration-100 ease-in-out">Get Started Now</button>
+            </div> 
         </div>
     </section>
 </div>

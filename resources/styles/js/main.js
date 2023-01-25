@@ -1,3 +1,7 @@
+//global classes
+//cyan active
+var cyan_tab_active = "border-cyan-500 text-cyan-500";
+
 $(function () {
     $("#categories_sortable").sortable({
         axis: 'y',
@@ -53,7 +57,9 @@ $(function () {
 });
 
 // const url_root= 'http://localhost/mod_organizer/';
-
+$(document).ready(function(){
+    $('.landing_page').fadeIn('fast');
+});
 $(document).on("click", "#add_category_input_btn", function () {
     var id = "category__" + ($("#add_category_modal .category").length + 1);
     $(".hidden_elements .add_category .category_input").prop("id", id);
@@ -266,3 +272,13 @@ $("#go_to_home").click(function(e) {
 //       $('#get_started_section').slideUp();
 //     }
 //   }); 
+
+$(document).on('click','.user_form_tabination .tab_item',function(e){
+    if($(this).hasClass('login_tab')){
+        $('.user_form_tabination .login_tab').addClass(cyan_tab_active);
+        $('.user_form_tabination .register_tab').removeClass(cyan_tab_active);
+    }else{
+        $('.user_form_tabination .register_tab').addClass(cyan_tab_active);
+        $('.user_form_tabination .login_tab').removeClass(cyan_tab_active);
+    }
+});

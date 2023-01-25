@@ -1,6 +1,6 @@
 <footer class="text-center mt-auto bg-gradient-to-br from-slate-100 via-cyan-50 to-teal-50">
   <div class="text-center p-4">
-    © 2021 Copyright:
+    © <?= date('Y') ?> Copyright:
     <a class="text-teal-500" href="https://tailwind-elements.com/">Brian Barasa</a>
   </div>
 </footer>
