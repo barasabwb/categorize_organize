@@ -91,7 +91,7 @@
               
             </div> -->
             <div class="modal-body relative p-4 bg-gradient-to-r from-slate-100 via-teal-50 to-cyan-50">
-                <div class="w-full h-full flex flex-row user_form_tabination">
+                <div class="w-full h-full flex flex-row user_form_tabination prevent-select">
                     <div class="w-full h-full text-center border-b-2 border-cyan-500 text-cyan-500 py-2 tab_item register_tab cursor-pointer">
                         Register
                     </div>
@@ -99,27 +99,27 @@
                         Login
                     </div>                       
                 </div>
-                <div class="w-full h-full flex flex-row">
+                <div class="register_section w-full h-full flex flex-row mt-8 mb-4">
                     <div class="w-full h-full">
-                        <img src="<?= ROOT?>resources/images/png_tree_Sort.png" class="" alt="" />
+                        <img src="<?= ROOT?>resources/images/sorting.png" class="" alt="" />
                     </div>
-                    <div class="w-full h-full pt-16">
-                        <form id="register_user_form">
+                    <div class="w-full h-full pt-1">
+                        <form id="register_user_form" autocomplete="off">
                             <div class="flex flex-col space-y-8">
                             <div class="form-group">
                                 <input
                                     type="text"
-                                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
-                                    id="registration_user_email"
-                                    name="registration_user_email"
-                                    aria-describedby="registration_user_email"
+                                    class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
+                                    id="registration_username"
+                                    name="registration_username"
+                                    aria-describedby="registration_username"
                                     placeholder="Username:"
                                 />
                             </div>
                             <div class="form-group">
                                 <input
                                     type="text"
-                                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
+                                    class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
                                     id="registration_user_email"
                                     name="registration_user_email"
                                     aria-describedby="registration_user_email"
@@ -128,21 +128,21 @@
                             </div>
                             <div class="form-group">
                                 <input
-                                    type="text"
-                                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
-                                    id="registration_user_email"
-                                    name="registration_user_email"
-                                    aria-describedby="registration_user_email"
+                                    type="password"
+                                    class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
+                                    id="registration_password"
+                                    name="registration_password"
+                                    aria-describedby="registration_password"
                                     placeholder="Password:"
                                 />
                             </div>
                             <div class="form-group">
                                 <input
-                                    type="text"
-                                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
-                                    id="registration_user_email"
-                                    name="registration_user_email"
-                                    aria-describedby="registration_user_email"
+                                    type="password"
+                                    class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
+                                    id="registration_confirm_password"
+                                    name="registration_confirm_password"
+                                    aria-describedby="registration_confirm_password"
                                     placeholder="Confirm Password:"
                                 />
                             </div>
@@ -150,8 +150,38 @@
                         </form>
                     </div>
                 </div>
+                <div class="login_section w-full h-full flex flex-row">
+                    <div class="w-full h-full pt-8 mb-4">
+                        <form id="login_user_form">
+                            <div class="flex flex-col space-y-8">
+                        
+                                <div class="form-group">
+                                    <input
+                                        type="email"
+                                        class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
+                                        id="login_user_email"
+                                        name="login_user_email"
+                                        aria-describedby="login_user_email"
+                                        placeholder="Email Address/Username:"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        type="password"
+                                        class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
+                                        id="login_user_password"
+                                        name="login_user_password"
+                                        aria-describedby="login_user_password"
+                                        placeholder="Password:"
+                                    />
+                                </div>
+         
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="w-full h-full text-center mb-2">
-                    <button class="px-2 py-1 bg-teal-400 text-white hover:bg-teal-500 rounded hover:scale-110 transition duration-100 ease-in-out">Sign Up</button>
+                    <button class="px-2 py-1 bg-teal-400 text-white hover:bg-teal-500 rounded hover:scale-110 transition duration-100 ease-in-out signup_btn">Sign Up</button>
                 </div>
             </div>
         </div>

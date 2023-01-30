@@ -3,6 +3,7 @@ define('ROOT',  'http://localhost/mod_organizer/');
 define('BASE',  __DIR__);
 
 require_once __DIR__.'/base/configurations.php';
+require_once __DIR__.'/base/session.php';
 require_once __DIR__.'/base/BaseModel.php';
 require_once __DIR__.'/base/BaseController.php';
 
@@ -63,6 +64,10 @@ if ($url == '/')
         {
             // then we call the method via the view
             // dynamic call of the view
+            print $controllerObj->$requestedAction($requestedParams);
+
+        }else{
+            $requestedAction = 'index';
             print $controllerObj->$requestedAction($requestedParams);
 
         }

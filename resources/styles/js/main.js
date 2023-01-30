@@ -1,6 +1,6 @@
 //global classes
 //cyan active
-var cyan_tab_active = "border-cyan-500 text-cyan-500";
+var cyan_tab_active = "border-cyan-500 text-cyan-500", error_class='border-red-500';
 
 $(function () {
     $("#categories_sortable").sortable({
@@ -277,8 +277,160 @@ $(document).on('click','.user_form_tabination .tab_item',function(e){
     if($(this).hasClass('login_tab')){
         $('.user_form_tabination .login_tab').addClass(cyan_tab_active);
         $('.user_form_tabination .register_tab').removeClass(cyan_tab_active);
+        $('.register_section').fadeOut(1);
+        $('.login_section').fadeIn('fast');
+        $('#register_user_modal .modal-dialog').removeClass('modal-lg');
+        $('#register_user_modal .signup_btn').removeClass('signup_btn').addClass('signin_btn').html('Sign In');
+
+
+
     }else{
         $('.user_form_tabination .register_tab').addClass(cyan_tab_active);
         $('.user_form_tabination .login_tab').removeClass(cyan_tab_active);
+        $('.login_section').fadeOut(1);
+        $('.register_section').fadeIn('fast');
+        $('#register_user_modal .modal-dialog').addClass('modal-lg');
+        $('#register_user_modal .signin_btn').removeClass('signin_btn').addClass('signup_btn').html('Sign Up');
+
+
     }
 });
+
+$(document).on('click', '.get_started_btn', function(){
+    $('.user_form_tabination .register_tab').addClass(cyan_tab_active);
+    $('.user_form_tabination .login_tab').removeClass(cyan_tab_active);
+    $('#register_user_modal .modal-dialog').addClass('modal-lg');
+    $('.login_section').fadeOut(1);
+    $('.register_section').fadeIn(1);
+    $('#register_user_modal .signin_btn').removeClass('signin_btn').addClass('signup_btn').html('Sign Up');
+
+});
+$(document).on('click', '.login_user_btn', function(){
+    $('.user_form_tabination .login_tab').addClass(cyan_tab_active);
+    $('.user_form_tabination .register_tab').removeClass(cyan_tab_active);
+    $('.register_section').fadeOut(1);
+    $('.login_section').fadeIn(1);
+    $('#register_user_modal .modal-dialog').removeClass('modal-lg');
+    $('#register_user_modal .signup_btn').removeClass('signup_btn').addClass('signin_btn').html('Sign In');
+
+    $('#register_user_modal').modal('show')
+
+});
+$(document).on('click', '.register_user_btn', function(){
+    $('.user_form_tabination .register_tab').addClass(cyan_tab_active);
+    $('.user_form_tabination .login_tab').removeClass(cyan_tab_active);
+    $('.login_section').fadeOut(1);
+    $('.register_section').fadeIn(1);
+    $('#register_user_modal .modal-dialog').addClass('modal-lg');
+    $('#register_user_modal .signin_btn').removeClass('signin_btn').addClass('signup_btn').html('Sign Up');
+
+
+    $('#register_user_modal').modal('show')
+
+});
+
+$(document).on('click', '.signup_btn', function(){
+    var valid = validate_user('register');
+    if(valid!=='valid'){
+        alert(valid);
+        return false
+    }
+    $.ajax({
+        url: url_root + "authentication/register_user",
+        type: "POST",
+        dataType: "JSON",
+        data: {
+            username: $('#register_user_modal #registration_username').val(),
+            password: $('#register_user_modal #registration_password').val(),
+            email_address: $('#register_user_modal #registration_user_email').val()
+
+        },
+        success: function (data) {
+            alert(data);
+        },
+        error: function (xhr, desc, err) {},
+    });
+    
+});
+$(document).on('click', '.signin_btn', function(){
+    var valid = validate_user('login');
+    if(valid!=='valid'){
+        alert(valid);
+    }
+    $.ajax({
+        url: url_root + "authentication/login_user",
+        type: "POST",
+        dataType: "JSON",
+        data: {
+            username: $('#register_user_modal #login_user_email').val(),
+            password: $('#register_user_modal #login_user_password').val()
+
+        },
+        success: function (data) {
+            alert(data);
+        },
+        error: function (xhr, desc, err) {},
+    });
+});
+
+$(document).on('focus', '.input-value', function(){
+    $(this).removeClass(error_class);
+});
+
+function validate_user(type){
+    var valid = 'valid';
+    if(type == 'register'){
+        if($('#register_user_modal #registration_username').val().length<4){
+            $('#register_user_modal #registration_username').addClass(error_class);
+            valid ='Username must be 4 characters or more';
+            return valid;
+        }
+        var test =  /^\w+$/.test($('#register_user_modal #registration_username').val());
+        if(test==false){
+            $('#register_user_modal #registration_username').addClass(error_class);
+            valid ='Invalid Username';
+            return valid;
+        }
+
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test($('#register_user_modal #registration_user_email').val())) {
+            $('#register_user_modal #registration_user_email').addClass(error_class);
+            valid ='Invalid Email';
+            return valid;
+        }
+
+        if($('#register_user_modal #registration_password').val()!==$('#register_user_modal #registration_confirm_password').val()){
+            $('#register_user_modal #registration_password').addClass(error_class);
+            $('#register_user_modal #registration_confirm_password').addClass(error_class);
+
+            valid ='Passwords do not match';
+            return valid;
+        }
+        var pass_test =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test($('#register_user_modal #registration_password').val());
+        if(pass_test==false){
+            $('#register_user_modal #registration_password').addClass(error_class);
+            $('#register_user_modal #registration_confirm_password').addClass(error_class);
+
+            valid ='Invalid Password. Length must be at least 8 with at least one uppercase letter';
+            return valid;
+        }
+    return valid;
+    }else if(type == 'login'){
+        if($('#register_user_modal #login_user_email').val().length<4){
+            $('#register_user_modal #login_user_email').addClass(error_class);
+            valid ='Invalid Username';
+            return valid;
+        }
+        
+        
+
+        var pass_test =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test($('#register_user_modal #login_user_password').val());
+        if(pass_test==false){
+            $('#register_user_modal #login_user_password').addClass(error_class);
+            $('#register_user_modal #login_user_password').addClass(error_class);
+
+            valid ='Invalid Password.';
+            return valid;
+        }
+    return valid;    }
+}

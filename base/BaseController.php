@@ -18,7 +18,19 @@
         require_once BASE.'../Models/'.$model.'_model.php';
         $model = ucfirst($model).'Model';
         return new $model();
+      }
 
+      public function redirect($url){
+        $url= ROOT.$url;
+        header("Location: $url");
+        die();
+      }
+
+      public function checkLogin(){
+        if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
+          return true;
+        }
+        return false;
       }
 
   }

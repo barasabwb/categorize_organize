@@ -8,14 +8,21 @@ class MainController extends BaseController
         $this->model = $this->load_model('Main');
     }
 
-    public function sayWelcome()
+    public function index()
     {
-        $rows = $this->model->retrieve_all('tbl_users', '*');
-        print_r($rows);
+        if(!$this->checkLogin()){
+            $this->redirect('main/landing_page');
+        }
+        $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
+        $data['categories'] = $row;
+        return $this->load_view('pages/main_page', $data);
     }
 
     public function home()
     {
+        if(!$this->checkLogin()){
+            $this->redirect('main/landing_page');
+        }
         $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
         $data['categories'] = $row;
         return $this->load_view('pages/main_page', $data);
@@ -23,6 +30,9 @@ class MainController extends BaseController
 
     public function landing_page()
     {
+        if($this->checkLogin()){
+            $this->redirect('main/');
+        }
         $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
         $data['categories'] = $row;
         return $this->load_view('pages/landing_page', $data);
