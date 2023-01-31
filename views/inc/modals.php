@@ -90,7 +90,7 @@
                 </div>
               
             </div> -->
-            <div class="modal-body relative p-4 bg-gradient-to-r from-slate-100 via-teal-50 to-cyan-50">
+            <div class="modal-body rounded-lg relative p-4 bg-gradient-to-r from-slate-100 via-teal-50 to-cyan-50">
                 <div class="w-full h-full flex flex-row user_form_tabination prevent-select">
                     <div class="w-full h-full text-center border-b-2 border-cyan-500 text-cyan-500 py-2 tab_item register_tab cursor-pointer">
                         Register
@@ -108,6 +108,7 @@
                             <div class="flex flex-col space-y-8">
                             <div class="form-group">
                                 <input
+                                autocomplete="off"
                                     type="text"
                                     class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
                                     id="registration_username"
@@ -157,6 +158,7 @@
                         
                                 <div class="form-group">
                                     <input
+                                        autocomplete="off"
                                         type="email"
                                         class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
                                         id="login_user_email"
@@ -181,7 +183,8 @@
                     </div>
                 </div>
                 <div class="w-full h-full text-center mb-2">
-                    <button class="px-2 py-1 bg-teal-400 text-white hover:bg-teal-500 rounded hover:scale-110 transition duration-100 ease-in-out signup_btn">Sign Up</button>
+
+                    <button class="px-2 py-1 bg-teal-400 text-white hover:bg-teal-500 rounded hover:scale-110 transition duration-100 ease-in-out signup_btn">Sign Up </button>
                 </div>
             </div>
         </div>

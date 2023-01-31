@@ -47,7 +47,7 @@ class MainModel extends BaseModel
             return (object)$rows;
         }
 
-        public function insert_data($table, $data){
+        public function insert_data($table, $data, $id=null){
             $keys = [];
             $table_data=[];
             foreach($data as $key => $value){
@@ -57,7 +57,13 @@ class MainModel extends BaseModel
             $sql = "INSERT INTO $table(".implode(', ',array_keys($data)).") values(".implode(', ',$keys).")";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($data);
-            return true;
+            if($id==true){
+                $last_id = $this->conn->lastInsertId();
+                return $last_id;
+            }else{
+                return true;
+            }
+           
         }
 
         public function update_row($table, $data, $where=null){

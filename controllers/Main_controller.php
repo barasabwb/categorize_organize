@@ -8,14 +8,16 @@ class MainController extends BaseController
         $this->model = $this->load_model('Main');
     }
 
+
+    // --------VIEWS--------
     public function index()
     {
         if(!$this->checkLogin()){
             $this->redirect('main/landing_page');
         }
-        $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
-        $data['categories'] = $row;
-        return $this->load_view('pages/main_page', $data);
+        $your_projects = $this->model->retrieve_all('tbl_categories', 'project', ['user_id'=>$_SESSION['user_id']]);
+        $data['projects'] = $your_projects;
+        return $this->load_view('pages/dashboard', $data);
     }
 
     public function home()
@@ -37,6 +39,22 @@ class MainController extends BaseController
         $data['categories'] = $row;
         return $this->load_view('pages/landing_page', $data);
     }
+
+    public function dashboard()
+    {
+        if(!$this->checkLogin()){
+            $this->redirect('main/landing_page');
+        }
+        $your_projects = $this->model->retrieve_all('tbl_categories', 'project', ['user_id'=>$_SESSION['user_id']]);
+        $data['projects'] = $your_projects;
+        return $this->load_view('pages/dashboard', $data);
+    }
+
+    // --------VIEWS--------
+
+
+
+    //---------FUNCTIONALITY----------
 
     public function add_category()
     {
@@ -222,12 +240,6 @@ class MainController extends BaseController
 
         array_multisort($position, SORT_ASC, $categories);
 
-
-        
-//        foreach ( $categories as $category){
-//            echo $category['name'].' '.$category['position'].'<br>';
-//            $i++;
-//        }
         $data = [
             'category_name' => json_encode($categories),
         ];
@@ -246,10 +258,6 @@ class MainController extends BaseController
         }
         $position = array_column($categories[$category_name]['mods'], 'position');
         array_multisort($position, SORT_ASC, $categories[$category_name]['mods']);
-//        foreach ( $categories[$category_name]['mods'] as $mod){
-//            echo $mod['name'].' '.$mod['position'].'<br>';
-//            $i++;
-//        }
 
         $data = [
             'category_name' => json_encode($categories),
@@ -294,7 +302,12 @@ class MainController extends BaseController
             echo json_encode('updated');
         }
     }
+        //---------FUNCTIONALITY----------
 
 
 
+     //---------ADMIN ONLY FUNCTIONALITY----------
+
+
+    //---------ADMIN ONLY FUNCTIONALITY----------
 }

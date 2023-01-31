@@ -2,8 +2,11 @@
   class BaseController
   {
         
-      public function load_view($view, $data=null)
+      public function load_view($view,$meta=null, $data=null)
       {
+        if($meta!==null){
+          $meta= (object)$meta;
+        }
         if($data!==null){
           $data= (object)$data;
         }

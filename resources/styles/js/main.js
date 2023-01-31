@@ -2,6 +2,13 @@
 //cyan active
 var cyan_tab_active = "border-cyan-500 text-cyan-500", error_class='border-red-500';
 
+//spinners
+var success_spinner = '<div class="flex justify-center items-center">\
+                            <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-teal-500" role="status">\
+                            <span class="visually-hidden">Loading...</span>\
+                            </div>\
+                        </div>';
+
 $(function () {
     $("#categories_sortable").sortable({
         axis: 'y',
@@ -330,9 +337,13 @@ $(document).on('click', '.register_user_btn', function(){
 });
 
 $(document).on('click', '.signup_btn', function(){
-    var valid = validate_user('register');
+    var valid = validate_user('register'), button = $(this);
     if(valid!=='valid'){
-        alert(valid);
+        Swal.fire(
+            'Notice!',
+            valid,
+            'error'
+          );
         return false
     }
     $.ajax({
@@ -346,16 +357,41 @@ $(document).on('click', '.signup_btn', function(){
 
         },
         success: function (data) {
-            alert(data);
+            $('.input-value').each(function(){
+                $(this).removeClass(error_class);
+            });
+            if(data == 'registered'){
+                button.parent().html(success_spinner);
+                window.setTimeout(function() { 
+                    window.location.href = url_root + 'main';
+                }, 1000);
+            }else{
+                Swal.fire(
+                    'Notice!',
+                    data,
+                    'error'
+                  );
+            }
         },
-        error: function (xhr, desc, err) {},
+        error: function (xhr, desc, err) {
+            Swal.fire(
+                'Notice!',
+                'We encountered an error! Try again Later!',
+                'error'
+              );
+        },
     });
     
 });
 $(document).on('click', '.signin_btn', function(){
-    var valid = validate_user('login');
+    var valid = validate_user('login'), button = $(this);
     if(valid!=='valid'){
-        alert(valid);
+        Swal.fire(
+            'Notice!',
+            valid,
+            'error'
+          );
+          return false;
     }
     $.ajax({
         url: url_root + "authentication/login_user",
@@ -367,9 +403,29 @@ $(document).on('click', '.signin_btn', function(){
 
         },
         success: function (data) {
-            alert(data);
+            $('.input-value').each(function(){
+                $(this).removeClass(error_class);
+            });
+            if(data == 'logged in'){
+                button.parent().html(success_spinner);
+                window.setTimeout(function() { 
+                    window.location.href = url_root + 'main';
+                }, 1000);
+            }else{
+                Swal.fire(
+                    'Notice!',
+                    data,
+                    'error'
+                  );
+            }
         },
-        error: function (xhr, desc, err) {},
+        error: function (xhr, desc, err) {
+            Swal.fire(
+                'Notice!',
+                'We encountered an error! Try again Later!',
+                'error'
+              );
+        },
     });
 });
 

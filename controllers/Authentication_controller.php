@@ -13,15 +13,21 @@ class AuthenticationController extends BaseController
     public function register_user(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if($this->model->check_if_exists('tbl_users', '*', ['email_address'=>$_POST['email_address']]) || $this->model->check_if_exists('tbl_users', '*', ['username'=>$_POST['username']])){
-                echo json_encode('user exists');
+                echo json_encode('A user with a similar username or email address exists');
             }else{
-
                 $data = [
                     'username' => $_POST['username'],
                     'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                     'email_address' => $_POST['email_address'],
                 ];
-                $this->model->insert_data('tbl_users', $data);
+                $id = $this->model->insert_data('tbl_users', $data, true);
+                $user = [
+                    'id' => $id,
+                    'username' => $_POST['username'],
+                    'email_address' => $_POST['email_address'],
+                ];
+                $user = (object)$user;
+                $this->createSession($user);
                 echo json_encode('registered');
             }
         }
@@ -32,23 +38,31 @@ class AuthenticationController extends BaseController
                 $user = $this->model->retrieve_row('tbl_users', '*', ['email_address'=>$_POST['username']]);
                 
                 if(password_verify($_POST['password'], $user->password)){
+                    $this->createSession($user);
                     echo json_encode('logged in');
                 }else{
-                    echo json_encode('wrong password');
+                    echo json_encode('The password/username is wrong!');
                 }
-                $this->createSession($user);
             }else if($this->model->check_if_exists('tbl_users', '*', ['username'=>$_POST['username']])){
                 $user = $this->model->retrieve_row('tbl_users', '*', ['username'=>$_POST['username']]);
                 if(password_verify($_POST['password'], $user->password)){
+                    $this->createSession($user);
                     echo json_encode('logged in');
                 }else{
-                    echo json_encode('wrong password');
+                    echo json_encode('The password/username is wrong!');
                 }
-                $this->createSession($user);
             }else{
-                echo json_encode('user does not exist');
+                echo json_encode('User does not exist!');
             }
         }
+    }
+
+    public function change_details(){
+
+    }
+
+    public function delete_account(){
+
     }
 
     public function createSession($user){
@@ -60,5 +74,6 @@ class AuthenticationController extends BaseController
 
     public function logout(){
         unset($_SESSION['loggedin'],$_SESSION['user_id'],$_SESSION['username'],$_SESSION['email_address']);
+        $this->redirect('main/landing_page');
     }
 }
