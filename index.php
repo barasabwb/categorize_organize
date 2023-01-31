@@ -21,7 +21,7 @@ if ($url == '/')
     // require_once __DIR__.'/Views/index_view.php';
 
     // $mainModel = New MainModel();
-    $mainController = New MainController();$mainController->home();
+    $mainController = New MainController();$mainController->landing_page();
 
 
 }else{
