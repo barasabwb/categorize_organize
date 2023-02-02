@@ -229,8 +229,8 @@
         </div>
     </div>
 </div>
-
-<div class="project_template cursor-pointer bg-white px-4 py-4 md:col-span-1 col-span-3 shadow-xl rounded-lg grid grid-cols-3 items-center hover:scale-105 transition duration-100 ease-in-out my_project hidden" id="{{id}}">
+<div class="project_template">
+<div class=" cursor-pointer bg-white px-4 py-4 md:col-span-1 col-span-3 shadow-xl rounded-lg grid grid-cols-3 items-center hover:scale-105 transition duration-100 ease-in-out my_project hidden" id="{{id}}">
     <div class="col-span-3 h-48 w-full bg-cover bg-no-repeat pb-2 border-b-2 border-grey-700 hover:border-teal-700 mb-2" style="background-image: url('<?= ROOT?>resources/images/{{project_image}}');"></div>
 
     <div class="col-span-3 ">
@@ -242,4 +242,5 @@
         {{project}}
         </p>
     </div>
+</div>
 </div>

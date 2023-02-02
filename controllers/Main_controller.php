@@ -62,13 +62,15 @@ class MainController extends BaseController
     //---------Projects  FUNCTIONALITY----------
     public function add_project(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            print_r($_POST);
+            $replacements['project_image'] = 'sorting.png';
+
             $replacements['project'] = $_POST['project_name'];
-            $replacements['id'] = 1;
+            $replacements['id'] = rand(100, 999);
             
-            $body = $this->parse_body_tags($_POST['project_template'], $replacements);
-                echo $body;
-            echo json_encode('added');
+            $data['project'] = $this->parse_body_tags($_POST['project_template'], $replacements);
+            $data['status'] = 'added';
+            $data['id'] = $replacements['id'];
+            echo json_encode($data);
         }
     }
 

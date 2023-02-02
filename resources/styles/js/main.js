@@ -513,7 +513,7 @@ $(document).on('click', '.submit_project_details_btn', function(){
         return false;
     }
     var project_template = $('.project_template').clone();
-    project_template.removeClass('hidden project_template');
+    // project_template.find('.my_project').removeClass('hidden');
     $.ajax({
         url: url_root + "main/add_project",
         type: "POST",
@@ -524,8 +524,9 @@ $(document).on('click', '.submit_project_details_btn', function(){
 
         },
         success: function (data) {
-         
+            
             $('.projects_section').append(data.project);
+            $('.projects_section #'+data.id).slideDown('slow');
             $('#add_project_modal').modal('hide');
 
         },
