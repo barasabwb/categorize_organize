@@ -9,4 +9,6 @@
 <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
 <script src="<?= ROOT?>resources/styles/js/main.js?version=<?php echo uniqid(); ?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+
 </html>

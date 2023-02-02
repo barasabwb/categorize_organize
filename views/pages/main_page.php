@@ -1,8 +1,7 @@
 <style></style>
 <div class="h-auto md:block hidden">
-    <div style="min-width: 15rem;max-width:15rem; height: 100%;" class=" w-auto custom_scroll shadow-md bg-white px-1 fixed z-10 font-sans overflow-y-auto">
-        
-        <div style="max-width:14.5rem" class="flex pb-2 fixed z-50 bg-white w-full border-b">
+    <div style="min-width: 15rem; max-width: 15rem; height: 100%;" class="w-auto custom_scroll shadow-md bg-white px-1 fixed z-10 font-sans overflow-y-auto">
+        <div style="max-width: 14.5rem;" class="flex pb-2 fixed z-50 bg-white w-full border-b">
             <div class="mr-4">
                 <span class="ml-5 text-sm tracking-wide font-sans align-bottom">
                     <span>Categories</span>
@@ -29,7 +28,7 @@
                 >
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-                <a class=" break-all inline-block flex category_item items-center text-sm py-4 pl-2 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded" href="" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                <a class="break-all inline-block flex category_item items-center text-sm py-4 pl-2 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded" href="" data-mdb-ripple="true" data-mdb-ripple-color="dark">
                     <!-- <img class="w-4 h-1 mr-3" src="<?= ROOT?>/resources/images/c1.png" style="height: 20px;" alt="" loading="lazy" /> -->
 
                     <span class="category_key text-xs"><?=$key ?></span>
@@ -44,9 +43,7 @@
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden">
                         <table class="min-w-full" id="mods_table">
-                            <thead class="border-b">
-                               
-                            </thead>
+                            <thead class="border-b"></thead>
                             <tbody class="mods">
                                 <tr class="border-b bg-gray-50 border-gray-200 mod_section">
                                     <td class="text-md text-center text-gray-900 font-medium px-6 py-4 whitespace-nowrap">

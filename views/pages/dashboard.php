@@ -1,4 +1,4 @@
-<div class="flex flex-col h-screen justify-between w-full bg-gradient-to-tr from-slate-100 via-teal-50 to-cyan-50 landing_page">
+<div class="flex flex-col h-auto justify-between w-full bg-gradient-to-tr from-slate-100 via-teal-50 to-cyan-50 landing_page">
     <section class="navigation_bar_section sticky top-0 z-50">
         <nav class="bg-transparent w-full py-4 px-4 flex items-center">
             <div>
@@ -18,10 +18,10 @@
         </nav>
     </section>
     <!-- <section class="w-full h-full bg-no-repeat bg-cover" style="background-position: center center; background-image: url('<?= ROOT?>resources/images/sorting.png'); height: 500px;"> -->
-    <section class="w-full h-full bg-gradient-to-tr from-slate-300 via-teal-50 to-cyan-50">
+    <section class="w-full h-auto  bg-gradient-to-tr from-slate-300 via-teal-50 to-cyan-50">
         <div class="h-full w-full px-5 md:px-10 py-5">
-            <div class="w-full">
-                <p class="font-bold md:text-4xl text-2xl text-teal-600">
+            <div class="w-full border-b-2 pb-2 border-teal-700">
+                <p class="font-bold md:text-2xl text-2xl text-teal-600">
                     <?= (date('H:i')>='05:00' && date('H:i')<'12:00'?'Good Morning':(date('H:i')>='12:00' && date('H:i')<'18:00'?'Good Afternoon':'Good Evening')) ?>
                     <span class="text-teal-700 md:text-2xl text-xl">
                         <?= $_SESSION['username']?>
@@ -30,39 +30,41 @@
                 </p>
                 <p class="md:pl-1 text-cyan-600">Get back to your projects right below!</p>
             </div>
-            <div class="w-full mt-4">
-                <div class="grid grid-cols-3">
-                    <div class="bg-white px-4 py-4 shadow-xl rounded-lg">
-                        <p class="font-bold md:text-4xl text-2xl text-teal-600">
-                            <?= (date('H:i')>='05:00' && date('H:i')<'12:00'?'Good Morning':(date('H:i')>='12:00' && date('H:i')<'18:00'?'Good Afternoon':'Good Evening')) ?>
-                            <span class="text-teal-700 md:text-2xl text-xl">
-                                <?= $_SESSION['username']?>
-                                &#128075;
-                            </span>
-                        </p>
-                        <p class="md:pl-1 text-cyan-600">Get back to your projects right below!</p>
-                    </div>
-                    <div class="">
-                        <p class="font-bold md:text-4xl text-2xl text-teal-600">
-                            <?= (date('H:i')>='05:00' && date('H:i')<'12:00'?'Good Morning':(date('H:i')>='12:00' && date('H:i')<'18:00'?'Good Afternoon':'Good Evening')) ?>
-                            <span class="text-teal-700 md:text-2xl text-xl">
-                                <?= $_SESSION['username']?>
-                                &#128075;
-                            </span>
-                        </p>
-                        <p class="md:pl-1 text-cyan-600">Get back to your projects right below!</p>
-                    </div>
-                    <div class="">
-                        <p class="font-bold md:text-4xl text-2xl text-teal-600">
-                            <?= (date('H:i')>='05:00' && date('H:i')<'12:00'?'Good Morning':(date('H:i')>='12:00' && date('H:i')<'18:00'?'Good Afternoon':'Good Evening')) ?>
-                            <span class="text-teal-700 md:text-2xl text-xl">
-                                <?= $_SESSION['username']?>
-                                &#128075;
-                            </span>
-                        </p>
-                        <p class="md:pl-1 text-cyan-600">Get back to your projects right below!</p>
-                    </div>
+            <div class="w-full h-full mt-4">
+                <button type="button" id="add_mod_btn" class="mb-2 float-right px-3 py-1.5 bg-teal-400 text-white hover:bg-teal-500 rounded hover:scale-110 transition duration-100 ease-in-out add_new_project_btn">
+                    <i class="fa fa-plus-circle add_mod_btn" aria-hidden="true"></i>
+                </button>
+                <br />
+                <br />
+                <?php  if($data->projects_count==0){?>
+                <div class="bg-white h-3/4 flex justify-center px-4 py-4 col-span-3 shadow-xl rounded-lg grid text-center items-center">
+                    <p class="font-extrabold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-teal-600">
+                        You don't have any active projects yet! Make one by clicking on the plus button.
+                    </p>
                 </div>
+                <?php } ?>
+                <div class="grid grid-cols-3 gap-4 w-full projects_section">
+
+                <?php  if($data->projects_count>0){
+                    foreach($data->projects as $project):
+                    ?>
+                    <div class="cursor-pointer bg-white px-4 py-4 md:col-span-1 col-span-3 shadow-xl rounded-lg grid grid-cols-3 items-center hover:scale-105 transition duration-100 ease-in-out my_project" id="<?= $project->id ?>">
+                        <div class="col-span-3 h-48 w-full bg-cover bg-no-repeat pb-2 border-b-2 border-grey-700 hover:border-teal-700 mb-2" style="background-image: url('<?= ROOT?>resources/images/sorting.png');"></div>
+
+                        <div class="col-span-3 ">
+                            <button class="bg-transparent ml-3 rounded-lg float-right text-red-500 text-xl delete_project_btn hover:scale-105 transition duration-100 ease-in-out" id="<?= $project->id?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                            <button class="bg-transparent rounded-lg float-right text-blue-500 text-xl edit_project_btn hover:scale-105 transition duration-100 ease-in-out" id="<?= $project->id?>"><i class="fa fa-pen" aria-hidden="true"></i></button>
+
+                            <p class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-teal-600">
+                                <?=$project->project ?>
+                            </p>
+                        </div>
+                    </div>
+                <?php endforeach; }?>
+                </div>
+
+
             </div>
         </div>
     </section>

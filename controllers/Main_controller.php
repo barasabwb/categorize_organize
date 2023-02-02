@@ -2,10 +2,11 @@
 class MainController extends BaseController
 {
     private $model;
-
+    
     function __construct()
     {
         $this->model = $this->load_model('Main');
+
     }
 
 
@@ -15,9 +16,8 @@ class MainController extends BaseController
         if(!$this->checkLogin()){
             $this->redirect('main/landing_page');
         }
-        $your_projects = $this->model->retrieve_all('tbl_categories', 'project', ['user_id'=>$_SESSION['user_id']]);
-        $data['projects'] = $your_projects;
-        return $this->load_view('pages/dashboard', $data);
+        $this->redirect('main/dashboard');
+
     }
 
     public function home()
@@ -25,6 +25,8 @@ class MainController extends BaseController
         if(!$this->checkLogin()){
             $this->redirect('main/landing_page');
         }
+        $meta['page_title'] = 'Project Name';
+
         $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
         $data['categories'] = $row;
         return $this->load_view('pages/main_page', $data);
@@ -35,9 +37,9 @@ class MainController extends BaseController
         if($this->checkLogin()){
             $this->redirect('main/');
         }
-        $row = $this->model->retrieve_row('tbl_categories', 'category_name', ['user_id'=>0]);
-        $data['categories'] = $row;
-        return $this->load_view('pages/landing_page', $data);
+        $meta['page_title'] = 'Landing Page';
+        
+        return $this->load_view('pages/landing_page', $meta);
     }
 
     public function dashboard()
@@ -45,16 +47,46 @@ class MainController extends BaseController
         if(!$this->checkLogin()){
             $this->redirect('main/landing_page');
         }
-        $your_projects = $this->model->retrieve_all('tbl_categories', 'project', ['user_id'=>$_SESSION['user_id']]);
-        $data['projects'] = $your_projects;
-        return $this->load_view('pages/dashboard', $data);
+        $data['projects'] = $this->model->retrieve_all('tbl_categories', 'id,project', ['user_id'=>$_SESSION['user_id']]);
+        $data['projects_count'] = 0;
+        if(!empty( $data['projects'])){
+            $data['projects_count'] = sizeof((array)$data['projects']);
+        }
+        $meta['page_title'] = 'Dashboard Home';
+        return $this->load_view('pages/dashboard',$meta, $data);
     }
 
     // --------VIEWS--------
 
 
+    //---------Projects  FUNCTIONALITY----------
+    public function add_project(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            print_r($_POST);
+            $replacements['project'] = $_POST['project_name'];
+            $replacements['id'] = 1;
+            
+            $body = $this->parse_body_tags($_POST['project_template'], $replacements);
+                echo $body;
+            echo json_encode('added');
+        }
+    }
 
-    //---------FUNCTIONALITY----------
+    public function delete_project(){
+
+    }
+    public function edit_project(){
+
+    }
+    public function sort_projects(){
+
+    }
+    
+
+    //---------Projects  FUNCTIONALITY----------
+
+
+    //---------CATEGORIES & MODSFUNCTIONALITY----------
 
     public function add_category()
     {
@@ -303,6 +335,8 @@ class MainController extends BaseController
         }
     }
         //---------FUNCTIONALITY----------
+
+
 
 
 

@@ -76,4 +76,5 @@ class AuthenticationController extends BaseController
         unset($_SESSION['loggedin'],$_SESSION['user_id'],$_SESSION['username'],$_SESSION['email_address']);
         $this->redirect('main/landing_page');
     }
+    
 }

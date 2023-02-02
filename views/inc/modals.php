@@ -190,3 +190,56 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="add_project_modal" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal relative w-auto pointer-events-none">
+        <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-transparent bg-clip-padding rounded-md outline-none text-current">
+            <!-- <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md text-white">
+                <div class="bg-cyan-50">
+                <button type="button"
+                class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+              
+            </div> -->
+            <div class="modal-body rounded-lg relative p-4 bg-gradient-to-r from-slate-100 via-teal-50 to-cyan-50">
+                <div class="grid grid-cols-1 gap-2">
+                    <div class="form-group">
+                                    <input
+                                        type="project_name"
+                                        class="input-value form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-teal-600 focus:outline-none"
+                                        id="project_name"
+                                        name="project_name"
+                                        aria-describedby="project_name"
+                                        placeholder="Project Name:"
+                                    />
+                                </div>
+                  
+                    <div class="">
+                        Project Image(optional):
+                        <input id="project_image" type="file" class="dropify">
+                    </div>
+                    <div class="text-center">
+                        <button class="p-2 bg-teal-400 hover:bg-teal-500 hover:scale-105 transition duration-100 ease-in-out text-sm text-white rounded submit_project_details_btn">Add Project</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="project_template cursor-pointer bg-white px-4 py-4 md:col-span-1 col-span-3 shadow-xl rounded-lg grid grid-cols-3 items-center hover:scale-105 transition duration-100 ease-in-out my_project hidden" id="{{id}}">
+    <div class="col-span-3 h-48 w-full bg-cover bg-no-repeat pb-2 border-b-2 border-grey-700 hover:border-teal-700 mb-2" style="background-image: url('<?= ROOT?>resources/images/{{project_image}}');"></div>
+
+    <div class="col-span-3 ">
+        <button class="bg-transparent ml-3 rounded-lg float-right text-red-500 text-xl delete_project_btn hover:scale-105 transition duration-100 ease-in-out" id="{{id}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+        <button class="bg-transparent rounded-lg float-right text-blue-500 text-xl edit_project_btn hover:scale-105 transition duration-100 ease-in-out" id="{{id}}"><i class="fa fa-pen" aria-hidden="true"></i></button>
+
+        <p class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-teal-600">
+        {{project}}
+        </p>
+    </div>
+</div>

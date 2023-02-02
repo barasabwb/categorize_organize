@@ -36,6 +36,12 @@
         return false;
       }
 
+      public function parse_body_tags($body, $array){
+        $repl = preg_replace_callback('/{{([^}]+)}}/', function ($m) use ($array) {
+          return $array[$m[1]]; }, $body);
+        return $repl;
+      }
+
   }
 
 
