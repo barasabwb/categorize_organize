@@ -8,6 +8,23 @@ var success_spinner = '<div class="flex justify-center items-center">\
                             <span class="visually-hidden">Loading...</span>\
                             </div>\
                         </div>';
+                        
+
+$(document).ready(function(){
+ if(notification_alert!==false){
+    notify_me(message, position, msg_class, duration);
+ }
+});
+
+function notify_me(message, position, msg_class, duration){
+    Swal.fire({
+        position: position,
+        icon: msg_class,
+        title: message,
+        showConfirmButton: false,
+        timer: duration
+      })
+}
 
 
 $(function () {
@@ -524,10 +541,14 @@ $(document).on('click', '.submit_project_details_btn', function(){
 
         },
         success: function (data) {
-            
+            if(data == "project exists"){
+                Swal.fire('Wait a minute...', 'You already have this project on deck!', 'info');
+                return false;
+            }
             $('.projects_section').append(data.project);
             $('.projects_section #'+data.id).slideDown('slow');
             $('#add_project_modal').modal('hide');
+            $('#add_project_modal #project_name').val('');
 
         },
         error: function (xhr, desc, err) {
@@ -538,4 +559,12 @@ $(document).on('click', '.submit_project_details_btn', function(){
               );
         },
     });
+});
+
+$(document).on('click', '.delete_project_btn', function(){
+    Swal.fire(
+        'Confirm',
+        'Are you sure you want to delete this project? Note Deleted projects are sent to a bin where they are deleted after 7 days.'
+    );
+
 });

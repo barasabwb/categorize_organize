@@ -62,10 +62,20 @@ class MainController extends BaseController
     //---------Projects  FUNCTIONALITY----------
     public function add_project(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if($this->model->check_if_exists('tbl_categories', '*', ['project'=>$_POST['project_name']]) ){
+                echo json_encode('project exists');
+                return false;
+            }
             $replacements['project_image'] = 'sorting.png';
-
+            $db_data = [
+                'project' => $_POST['project_name'],
+                'user_id' => $_SESSION['user_id'],
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+            $id = $this->model->insert_data('tbl_categories', $db_data, true);
+            
             $replacements['project'] = $_POST['project_name'];
-            $replacements['id'] = rand(100, 999);
+            $replacements['id'] = $id;
             
             $data['project'] = $this->parse_body_tags($_POST['project_template'], $replacements);
             $data['status'] = 'added';

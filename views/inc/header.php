@@ -62,7 +62,16 @@
         </style>
         <script>
             let url_root = "<?= ROOT ?>";
-        </script>
+            </script>
+        <?php if(!empty($data['notify_me'])){?>
+            <script>
+                let notification_alert=true,message = "<?= $data['notify_message'] ?>",msg_class = "<?= $data['notify_class'] ?>",position = "<?= $data['notify_position'] ?>",duration = "<?= $data['notify_duration'] ?>";
+            </script>
+        <?php }else{?>
+            <script>
+                notification_alert=false;
+            </script>
+        <?php }?>
     </head>
 
     <body class="font-sans"></body>
