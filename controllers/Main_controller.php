@@ -108,7 +108,20 @@ class MainController extends BaseController
             echo json_encode('Moved to trash');
         }
     }
-    public function edit_project(){
+    public function edit_project($state){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if($state='start'){
+                $project = $this->model->retrieve_row('tbl_categories', '*', ['id'=>$_POST['project_id']]);
+                $data['name'] = $project->project;
+                $data['image'] = $project->project_image;
+                echo json_encode($data);
+
+            }
+            if($state='update'){
+                
+            }
+
+        }
 
     }
     public function sort_projects(){

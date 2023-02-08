@@ -84,7 +84,7 @@ $(function () {
 // const url_root= 'http://localhost/mod_organizer/';
 $(document).ready(function(){
     $('.landing_page').fadeIn('fast');
-    $('.dropify').dropify();
+  
 
 });
 $(document).on("click", "#add_category_input_btn", function () {
@@ -513,7 +513,9 @@ function validate_user(type){
 
 
 $(document).on('click', '.add_new_project_btn', function(){
+    $('#add_project_modal #project_name').val('');
     $('#add_project_modal').modal('show');
+    $('.dropify').dropify();
 });
 function validate_input_length(modal_name, length, custom_length_1=0, custom_length_2=0){
     var isvalid=true;
@@ -610,4 +612,37 @@ $(document).on('click', '.delete_project_btn', function(){
     //     }
     //   })
 
+});
+
+$(document).on('click', '.edit_project_btn', function(){
+    $.ajax({
+        url: url_root + "main/edit_project/start",
+        type: "POST",
+        dataType: "JSON",
+        data: {
+            project_id: $(this).prop('id')
+
+        },
+        success: function (data) {
+            $('#add_project_modal #project_name').val(data.name);
+            $('#project_image').attr("data-default-file", "http://mod_organizer.test/resources/images/"+data.image);            
+            var drEvent = $('#project_image').dropify();
+            drEvent = drEvent.data('dropify');
+            drEvent.resetPreview();
+            drEvent.clearElement();
+            drEvent.destroy();
+            drEvent.init();
+            $('#project_image').dropify();
+
+            $('#add_project_modal').modal('show');
+
+        },
+        error: function (xhr, desc, err) {
+            Swal.fire(
+                'Notice!',
+                'We encountered an error! Try again Later!',
+                'error'
+              );
+        },
+    });
 });
