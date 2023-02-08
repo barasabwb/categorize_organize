@@ -63,9 +63,9 @@
         <script>
             let url_root = "<?= ROOT ?>";
             </script>
-        <?php if(!empty($data['notify_me'])){?>
+        <?php if(!empty($data->notify_me)){?>
             <script>
-                let notification_alert=true,message = "<?= $data['notify_message'] ?>",msg_class = "<?= $data['notify_class'] ?>",position = "<?= $data['notify_position'] ?>",duration = "<?= $data['notify_duration'] ?>";
+                let notification_alert=true,message = "<?= $data->notify_message ?>",msg_class = "<?= $data->notify_class ?>",position = "<?= $data->notify_position ?>",duration = "<?= $data->notify_duration?>";
             </script>
         <?php }else{?>
             <script>
@@ -75,4 +75,3 @@
     </head>
 
     <body class="font-sans"></body>
-</html>

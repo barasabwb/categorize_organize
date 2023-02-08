@@ -549,6 +549,7 @@ $(document).on('click', '.submit_project_details_btn', function(){
             $('.projects_section #'+data.id).slideDown('slow');
             $('#add_project_modal').modal('hide');
             $('#add_project_modal #project_name').val('');
+            notify_me('Project Added', 'center', 'success', '1000');
 
         },
         error: function (xhr, desc, err) {
@@ -562,9 +563,51 @@ $(document).on('click', '.submit_project_details_btn', function(){
 });
 
 $(document).on('click', '.delete_project_btn', function(){
-    Swal.fire(
-        'Confirm',
-        'Are you sure you want to delete this project? Note Deleted projects are sent to a bin where they are deleted after 7 days.'
-    );
+    var current_btn = $(this);
+    // Swal.fire(
+        $.ajax({
+            url: url_root + "main/delete_project",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                project_id: $(this).prop('id')
+    
+            },
+            success: function (data) {
+                $(current_btn).closest('.my_project').slideUp('slow');
+                notify_me('Project Removed', 'center', 'success', '1000');
+            },
+            error: function (xhr, desc, err) {
+                Swal.fire(
+                    'Notice!',
+                    'We encountered an error! Try again Later!',
+                    'error'
+                  );
+            },
+        });
+    //     'Confirm',
+    //     'Are you sure you want to delete this project? Note Deleted projects are sent to a bin where they are deleted after 7 days.'
+    // );
+    // Swal.fire({
+    //     title: 'Are you sure?',
+    //     text: "You won't be able to revert this!",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     customClass: {
+    //         confirmButton: 'bg-teal-400',
+    //         cancelButton: 'btn btn-danger'
+    //       },
+    //     // confirmButtonColor: '#3085d6',
+    //     // cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Yes, delete it!'
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'Your file has been deleted.',
+    //         'success'
+    //       )
+    //     }
+    //   })
 
 });

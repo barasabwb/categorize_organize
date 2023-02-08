@@ -52,6 +52,12 @@ class MainController extends BaseController
         if(!empty( $data['projects'])){
             $data['projects_count'] = sizeof((array)$data['projects']);
         }
+        // $data['notify_me'] = true;
+        // $data['notify_message'] = 'Hello';
+        // $data['notify_position'] = 'top-right';
+        // $data['notify_class'] = 'success';
+        // $data['notify_duration'] = '1000';
+
         $meta['page_title'] = 'Dashboard Home';
         return $this->load_view('pages/dashboard',$meta, $data);
     }
@@ -85,7 +91,22 @@ class MainController extends BaseController
     }
 
     public function delete_project(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if(!$this->model->check_if_exists('tbl_categories', '*', ['id'=>$_POST['project_id']]) ){
+                echo json_encode('project does not exist');
+                return false;
+            }
+            $project = $this->model->retrieve_row('tbl_categories', '*', ['id'=>$_POST['project_id']]);
+            
+            $project = (array)$project;
+            unset($project['id']);
+            $project['deleted_at'] = date('Y-m-d H:i:s');
+            $this->model->insert_data('deleted_projects_tbl', $project);
+            $this->model->delete('tbl_categories', ['id'=>$_POST['project_id']]);
 
+        
+            echo json_encode('Moved to trash');
+        }
     }
     public function edit_project(){
 

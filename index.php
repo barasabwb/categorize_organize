@@ -1,5 +1,5 @@
 <?php
-define('ROOT',  'http://localhost/mod_organizer/');
+define('ROOT',  'http://mod_organizer.test/');
 define('BASE',  __DIR__);
 
 require_once __DIR__.'/base/configurations.php';
