@@ -108,17 +108,34 @@ class MainController extends BaseController
             echo json_encode('Moved to trash');
         }
     }
-    public function edit_project($state){
+    public function edit_project($params){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if($state='start'){
+            if($params[0]=='start'){
                 $project = $this->model->retrieve_row('tbl_categories', '*', ['id'=>$_POST['project_id']]);
                 $data['name'] = $project->project;
                 $data['image'] = $project->project_image;
                 echo json_encode($data);
 
             }
-            if($state='update'){
+            if($params[0]=='update'){
+                $db_data = [
+                    'project' => $_POST['project_name'],
+                    'last_updated' => date('Y-m-d H:i:s'),
+                ];
+                $data['project_image'] = 'none';
+
+                if(!empty($_POST['project_image'])){
+                    $db_data['project_image'] = $_POST['project_image'];
+                    $data['project_image'] = $_POST['project_image'];
+                }
+
+                $this->model->update_row('tbl_categories', $db_data, ['id'=>$_POST['id']]);
+            
                 
+                $data['project'] = $_POST['project_name'];
+                $data['status'] = 'updated';
+                $data['id'] = $_POST['id'];
+                echo json_encode($data);
             }
 
         }

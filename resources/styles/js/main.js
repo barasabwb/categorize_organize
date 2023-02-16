@@ -514,6 +514,8 @@ function validate_user(type){
 
 $(document).on('click', '.add_new_project_btn', function(){
     $('#add_project_modal #project_name').val('');
+    $('.submit_project_details_btn').removeClass('update_project_btn').html('Add Project');
+
     $('#add_project_modal').modal('show');
     $('.dropify').dropify();
 });
@@ -531,15 +533,21 @@ $(document).on('click', '.submit_project_details_btn', function(){
     if(!validate_input_length('add_project_modal', 3)){
         return false;
     }
-    var project_template = $('.project_template').clone();
+    var project_template = $('.project_template').clone(),url='add_project',id=null;
+
+    if($(this).hasClass('update_project_btn')){
+        url = 'edit_project/update';
+        id = $(this).prop('id');
+    }
     // project_template.find('.my_project').removeClass('hidden');
     $.ajax({
-        url: url_root + "main/add_project",
+        url: url_root + "main/"+url,
         type: "POST",
         dataType: "JSON",
         data: {
             project_name: $('#add_project_modal #project_name').val(),
             project_template: project_template.html(),
+            id:id
 
         },
         success: function (data) {
@@ -547,12 +555,25 @@ $(document).on('click', '.submit_project_details_btn', function(){
                 Swal.fire('Wait a minute...', 'You already have this project on deck!', 'info');
                 return false;
             }
-            $('.projects_section').append(data.project);
-            $('.projects_section #'+data.id).slideDown('slow');
-            $('#add_project_modal').modal('hide');
-            $('#add_project_modal #project_name').val('');
-            notify_me('Project Added', 'center', 'success', '1000');
-
+            if(data.status == "added"){
+                $('.projects_section').append(data.project);
+                $('.projects_section #'+data.id).slideDown('slow');
+                $('#add_project_modal').modal('hide');
+                $('#add_project_modal #project_name').val('');
+                notify_me('Project Added', 'center', 'success', '1000');
+            }
+            if(data.status == "updated"){
+                $('#add_project_modal').modal('hide');
+                $('.projects_section #'+data.id).fadeOut('fast', function(){
+                    window.setTimeout(function() { 
+                        $('.projects_section #'+data.id+' .font-extrabold').html(data.project);
+                        if(data.project_image!=='none'){
+                            $('.projects_section #'+data.id+' .bg-cover').css("background-image", "url("+url_root+"/resources/images/+"+data.project_image+")");  
+                        }
+                        $('.projects_section #'+data.id).slideDown('fast');
+                    }, 100);
+                });              
+            }
         },
         error: function (xhr, desc, err) {
             Swal.fire(
@@ -615,6 +636,7 @@ $(document).on('click', '.delete_project_btn', function(){
 });
 
 $(document).on('click', '.edit_project_btn', function(){
+    var id = $(this).prop('id');
     $.ajax({
         url: url_root + "main/edit_project/start",
         type: "POST",
@@ -625,14 +647,15 @@ $(document).on('click', '.edit_project_btn', function(){
         },
         success: function (data) {
             $('#add_project_modal #project_name').val(data.name);
-            $('#project_image').attr("data-default-file", "http://mod_organizer.test/resources/images/"+data.image);            
-            var drEvent = $('#project_image').dropify();
-            drEvent = drEvent.data('dropify');
-            drEvent.resetPreview();
-            drEvent.clearElement();
-            drEvent.destroy();
-            drEvent.init();
-            $('#project_image').dropify();
+            // $('#project_image').attr("data-default-file", "http://mod_organizer.test/resources/images/"+data.image);            
+            // var drEvent = $('#project_image').dropify();
+            // drEvent = drEvent.data('dropify');
+            // drEvent.resetPreview();
+            // drEvent.clearElement();
+            // drEvent.destroy();
+            // drEvent.init();
+            // $('#project_image').dropify();
+            $('.submit_project_details_btn').addClass('update_project_btn').html('Update').prop('id',id);
 
             $('#add_project_modal').modal('show');
 
